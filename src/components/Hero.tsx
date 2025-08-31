@@ -31,8 +31,7 @@ const Hero = () => {
             </Button>
             <GhostButton size="lg" className="group">
               <Play className="w-4 h-4 mr-2" />
-              Watch Success Stories
-            </GhostButton>
+              </GhostButton>
           </div>
 
           <div className="flex items-center gap-8 pt-8">
