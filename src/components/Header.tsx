@@ -14,7 +14,7 @@ const Header = () => {
             <img 
               src="/lovable-uploads/ced30335-8fb0-4a64-9e12-9ff621376b09.png" 
               alt="VIBERZ AI Logo" 
-              className="h-10 w-auto"
+              className="h-16 w-auto"
             />
           </Link>
           
