@@ -10,8 +10,12 @@ const Header = () => {
     <Nav>
       <div className="container py-4">
         <div className="flex items-center justify-between">
-          <Link to="/" className="text-xl font-bold text-gradient">
-             VIBERZ Agentic Consulting
+          <Link to="/" className="flex items-center">
+            <img 
+              src="/lovable-uploads/ced30335-8fb0-4a64-9e12-9ff621376b09.png" 
+              alt="VIBERZ AI Logo" 
+              className="h-10 w-auto"
+            />
           </Link>
           
           {/* Desktop Navigation */}
