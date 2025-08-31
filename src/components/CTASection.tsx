@@ -10,7 +10,7 @@ const CTASection = () => {
           Ready to Transform Your Business with AI?
         </h3>
         <p className="text-muted-foreground mb-6">
-          Join 150+ Nigerian businesses already leveraging AI for growth.
+          Join the increasing Nigerian businesses already leveraging AI for growth.
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Button as={Link} to="/consultation" size="lg">

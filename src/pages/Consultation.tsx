@@ -30,7 +30,7 @@ const Consultation = () => {
       <div className="container py-12 md:py-16">
         <h1 className="text-3xl md:text-4xl font-bold mb-4">Consultation</h1>
         <p className="text-muted-foreground max-w-3xl mb-8">
-          Book a session — virtual or in-person (Lagos, Abuja, Port Harcourt).
+          Book a session — virtual or in-person (Lagos, Abuja, Benin, Port Harcourt).
         </p>
 
         <div className="grid gap-6 md:grid-cols-2">
@@ -94,6 +94,7 @@ const Consultation = () => {
                     <option value="">Select...</option>
                     <option value="Lagos">Lagos</option>
                     <option value="Abuja">Abuja</option>
+                    <option value="Benin">Benin</option>
                     <option value="Port Harcourt">Port Harcourt</option>
                     <option value="Virtual">Virtual</option>
                   </select>

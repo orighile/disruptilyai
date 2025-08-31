@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="container py-10 grid gap-6 md:grid-cols-3">
         <div>
           <div className="text-xl font-bold text-gradient mb-2">
-            TRIADE TECHNOLOGY NG
+             VIBERZ Agentic Nigeria
           </div>
           <p className="text-sm text-muted-foreground">
             Nigeria's leading AI Business Consulting & Automation agency.
@@ -28,7 +28,7 @@ const Footer = () => {
           </Link>
         </nav>
         <div className="text-sm text-muted-foreground">
-          © {new Date().getFullYear()} Triade Technology NG. All rights reserved.
+          © {new Date().getFullYear()} Triade Technology Limited. All rights reserved.
         </div>
       </div>
     </footer>

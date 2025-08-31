@@ -54,11 +54,11 @@ const Metrics = () => {
     <section className="container py-12 md:py-16">
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6 glass-card">
         <div className="text-center">
-          <AnimatedNumber value={2500000000} prefix="₦" suffix="+" />
-          <p className="text-sm text-muted-foreground mt-2">Revenue Generated</p>
+          <AnimatedNumber value={1000000000} prefix="₦" suffix="+" />
+          <p className="text-sm text-muted-foreground mt-2">Cost Saved</p>
         </div>
         <div className="text-center">
-          <AnimatedNumber value={2000} suffix="+" />
+          <AnimatedNumber value={1000} suffix="+" />
           <p className="text-sm text-muted-foreground mt-2">Working Hours Saved Monthly</p>
         </div>
         <div className="text-center">
@@ -66,7 +66,7 @@ const Metrics = () => {
           <p className="text-sm text-muted-foreground mt-2">Client Satisfaction Rate</p>
         </div>
         <div className="text-center">
-          <AnimatedNumber value={300} suffix="+" />
+          <AnimatedNumber value={50} suffix="+" />
           <p className="text-sm text-muted-foreground mt-2">AI Solutions Deployed</p>
         </div>
       </div>

@@ -11,7 +11,7 @@ const Header = () => {
       <div className="container py-4">
         <div className="flex items-center justify-between">
           <Link to="/" className="text-xl font-bold text-gradient">
-            TRIADE TECHNOLOGY NG
+             VIBERZ Agentic Nigeria
           </Link>
           
           {/* Desktop Navigation */}

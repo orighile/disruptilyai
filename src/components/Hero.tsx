@@ -37,12 +37,12 @@ const Hero = () => {
 
           <div className="flex items-center gap-8 pt-8">
             <div>
-              <div className="text-2xl font-bold text-accent-400">150+</div>
+              <div className="text-2xl font-bold text-accent-400">50+</div>
               <div className="text-sm text-muted-foreground">Businesses Transformed</div>
             </div>
             <div>
-              <div className="text-2xl font-bold text-accent-400">₦2.5B+</div>
-              <div className="text-sm text-muted-foreground">Revenue Generated</div>
+              <div className="text-2xl font-bold text-accent-400">₦1B+ globally</div>
+              <div className="text-sm text-muted-foreground">Cost Saved</div>
             </div>
             <div>
               <div className="text-2xl font-bold text-accent-400">98%</div>
