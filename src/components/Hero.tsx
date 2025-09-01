@@ -29,9 +29,6 @@ const Hero = () => {
               Book Free Consultation
               <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition" />
             </Button>
-            <GhostButton size="lg" className="group">
-              <Play className="w-4 h-4 mr-2" />
-              </GhostButton>
           </div>
 
           <div className="flex items-center gap-8 pt-8">

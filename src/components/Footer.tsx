@@ -6,9 +6,11 @@ const Footer = () => {
     <footer className="mt-20 border-t border-white/10 bg-slate-900/40">
       <div className="container py-10 grid gap-6 md:grid-cols-3">
         <div>
-          <div className="text-xl font-bold text-gradient mb-2">
-             VIBERZ Agentic Consulting
-          </div>
+          <img 
+            src="/lovable-uploads/ced30335-8fb0-4a64-9e12-9ff621376b09.png" 
+            alt="VIBERZ Agentic Consulting Logo" 
+            className="h-12 mb-2"
+          />
           <p className="text-sm text-muted-foreground">
             Nigeria's leading AI Business Consulting & Automation agency.
           </p>
