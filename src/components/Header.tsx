@@ -29,9 +29,6 @@ const Header = () => {
             <Link to="/resources" className="text-sm hover:text-accent-400 transition">
               Resources
             </Link>
-            <Link to="/ai-user-guide" className="text-sm hover:text-accent-400 transition">
-              AI User Guide
-            </Link>
             <Button as={Link} to="/consultation" size="sm">
               Book Consultation
             </Button>
@@ -70,13 +67,6 @@ const Header = () => {
                 onClick={() => setIsOpen(false)}
               >
                 Resources
-              </Link>
-              <Link 
-                to="/ai-user-guide" 
-                className="text-sm hover:text-accent-400 transition"
-                onClick={() => setIsOpen(false)}
-              >
-                AI User Guide
               </Link>
               <Button as={Link} to="/consultation" size="sm" onClick={() => setIsOpen(false)}>
                 Book Consultation

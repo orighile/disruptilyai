@@ -111,6 +111,8 @@ const Resources = () => {
 
         <div className="grid gap-6 md:grid-cols-3">
           {[
+            ['AI User Guide', 'Complete guide for Nigerian businesses to adopt and scale AI solutions.'],
+            ['Preconsultation Templates', 'Templates to help prepare for your AI consultation session.'],
             ['State of AI in Nigeria (Annual Report)', 'Download the latest insights and adoption trends in Nigeria.'],
             ['Automation Opportunity Assessment', 'Self-service audit to locate automation quick wins.'],
             ['Industry Guides', 'Banking, E-commerce, Manufacturing, Healthcare.']
@@ -119,7 +121,7 @@ const Resources = () => {
               <div className="font-semibold mb-2">{title}</div>
               <p className="text-sm text-muted-foreground mb-4">{desc}</p>
               <a className="text-sm text-accent-500 hover:text-accent-400 transition" href="#">
-                Learn more →
+                Download →
               </a>
             </Card>
           ))}

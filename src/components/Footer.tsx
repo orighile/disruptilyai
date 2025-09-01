@@ -9,7 +9,7 @@ const Footer = () => {
           <img 
             src="/lovable-uploads/ced30335-8fb0-4a64-9e12-9ff621376b09.png" 
             alt="VIBERZ Agentic Consulting Logo" 
-            className="h-12 mb-2"
+            className="h-20 mb-2"
           />
           <p className="text-sm text-muted-foreground">
             Nigeria's leading AI Business Consulting & Automation agency.
