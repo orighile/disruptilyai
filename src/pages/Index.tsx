@@ -4,7 +4,6 @@ import Hero from '../components/Hero';
 import Credibility from '../components/Credibility';
 import Metrics from '../components/Metrics';
 import ServicesCards from '../components/ServicesCards';
-import ChatPreview from '../components/ChatPreview';
 import CTASection from '../components/CTASection';
 import Footer from '../components/Footer';
 
@@ -17,7 +16,6 @@ const Index = () => {
         <Credibility />
         <Metrics />
         <ServicesCards />
-        <ChatPreview />
         <CTASection />
       </main>
       <Footer />
