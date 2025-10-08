@@ -12,7 +12,7 @@ const Footer = () => {
             <img 
               src="/lovable-uploads/disruptily-logo.png" 
               alt="Disruptily AI Logo" 
-              className="h-16 mb-4"
+              className="h-20 mb-4"
             />
             <h3 className="text-lg font-bold mb-2">DISRUPTILY AI</h3>
             <p className="text-sm text-muted-foreground mb-4">
