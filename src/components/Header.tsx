@@ -14,7 +14,7 @@ const Header = () => {
             <img 
               src="/lovable-uploads/disruptily-logo.png" 
               alt="Disruptily AI Logo" 
-              className="h-20 w-auto"
+              className="h-28 w-auto"
             />
           </Link>
           
