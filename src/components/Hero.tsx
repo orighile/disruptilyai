@@ -22,6 +22,13 @@ const Hero = () => {
               Unlock exponential growth with AI solutions designed for Nigerian businesses. 
               From automation to intelligence, we build systems that scale with your ambitions.
             </p>
+            <p className="text-lg text-muted-foreground max-w-2xl">
+              At Disruptily AI, we empower organizations across Nigeria to harness the transformative 
+              power of artificial intelligence. Whether you're looking to automate repetitive tasks, 
+              gain deeper insights from your data, or create intelligent customer experiences, our 
+              team of experts delivers tailored AI solutions that drive measurable results. We understand 
+              the unique challenges of the Nigerian market and build technology that works for your reality.
+            </p>
           </div>
           
           <div className="flex flex-col sm:flex-row gap-4">

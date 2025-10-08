@@ -12,8 +12,8 @@ const Header = () => {
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center">
             <img 
-              src="/lovable-uploads/ced30335-8fb0-4a64-9e12-9ff621376b09.png" 
-              alt="VIBERZ AI Logo" 
+              src="/lovable-uploads/disruptily-logo.png" 
+              alt="Disruptily AI Logo" 
               className="h-20 w-auto"
             />
           </Link>

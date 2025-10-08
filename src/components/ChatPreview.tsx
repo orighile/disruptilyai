@@ -23,7 +23,7 @@ function MiniLocalAnswer(q: string) {
 export default function ChatPreview() {
   const [open, setOpen] = useState(true);
   const [input, setInput] = useState('');
-  const [messages, setMessages] = useState([{ role: 'assistant', content: 'Hi! I\'m the Viberz Agentic Consulting AI assistant. Ask me about AI in business, automation, ROI, governance, or our consulting approach.' }]);
+  const [messages, setMessages] = useState([{ role: 'assistant', content: 'Hi! I\'m the Disruptily AI assistant. Ask me about AI in business, automation, ROI, governance, or our consulting approach.' }]);
 
   function send(text: string) {
     if (!text.trim()) return;
@@ -40,7 +40,7 @@ export default function ChatPreview() {
     <div className="min-h-[70vh] bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-slate-100 grid place-items-center">
       <div className="w-[22rem] sm:w-[26rem] h-[32rem] bg-slate-900 rounded-2xl shadow-xl border border-white/10 overflow-hidden flex flex-col">
         <header className="px-4 py-3 bg-slate-800/70 border-b border-white/10 flex items-center justify-between">
-          <div className="font-semibold text-sm">💬 Viberz Agentic — AI Assistant</div>
+          <div className="font-semibold text-sm">💬 Disruptily AI — AI Assistant</div>
           <button onClick={() => setOpen(!open)} className="rounded-lg px-2 py-1 hover:bg-white/10">{open ? 'Hide' : 'Show'}</button>
         </header>
         {open && (
