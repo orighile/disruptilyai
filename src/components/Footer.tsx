@@ -10,8 +10,8 @@ const Footer = () => {
           {/* Company Info */}
           <div>
             <img 
-              src="/lovable-uploads/disruptily-logo.png" 
-              alt="Disruptily AI Logo" 
+              src="/lovable-uploads/disruptily-logo-new.png" 
+              alt="Disruptily AI Logo"
               className="h-24 mb-4"
               style={{ filter: 'drop-shadow(0 0 20px rgba(255,255,255,0.1))' }}
             />
