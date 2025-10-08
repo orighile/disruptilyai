@@ -12,7 +12,8 @@ const Footer = () => {
             <img 
               src="/lovable-uploads/disruptily-logo.png" 
               alt="Disruptily AI Logo" 
-              className="h-20 mb-4"
+              className="h-24 mb-4"
+              style={{ filter: 'drop-shadow(0 0 20px rgba(255,255,255,0.1))' }}
             />
             <h3 className="text-lg font-bold mb-2">DISRUPTILY AI</h3>
             <p className="text-sm text-muted-foreground mb-4">
