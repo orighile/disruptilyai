@@ -100,10 +100,10 @@ const Services = () => {
               <tbody className="text-foreground">
                 {[
                   ['AI Roadmap','✓','✓','✓'],
+                  ['Deepfake Detection','✓','✓','✓'],
                   ['Marketing Automation','•','✓','✓'],
                   ['Custom Agents','•','✓','✓'],
-                  ['Legacy Integration','—','—','✓'],
-                  ['Training & Enablement','•','✓','✓'],
+                  ['Legacy Integration','—','•','✓'],
                   ['Governance, Risk & Compliance','—','•','✓'],
                 ].map((row, i) => (
                   <tr key={i} className="border-t border-white/10">
