@@ -5,6 +5,20 @@ import { Link } from 'react-router-dom';
 
 const cards = [
   {
+    icon: ShieldCheck,
+    title: 'Deepfake Detection',
+    desc: 'Protect your organization from AI-generated synthetic media threats with enterprise-grade detection powered by Reality Defender & Sensity.',
+    features: [
+      'Real-time deepfake detection',
+      'Video & image authentication',
+      'Voice clone detection',
+      'API integration & monitoring'
+    ],
+    result: '99.2% detection accuracy',
+    cta: 'Protect Your Organization',
+    link: '/deepfake-detection'
+  },
+  {
     icon: Building2,
     title: 'Enterprise AI Transformation',
     desc: 'Modernize your established business with AI solutions that integrate seamlessly with operations and drive growth.',
@@ -70,31 +84,18 @@ const cards = [
     cta: 'Deploy AI Agents'
   },
   {
-    icon: GraduationCap,
-    title: 'AI Training as a Service',
-    desc: 'Custom model training & corporate AI education to build internal capabilities.',
-    features: [
-      'Fine-tuning & training',
-      'Corporate programs',
-      'Hands-on workshops',
-      'Ongoing mentorship'
-    ],
-    result: '100+ trained, 85% certified',
-    cta: 'Start AI Training'
-  },
-  {
     icon: ShieldCheck,
-    title: 'Deepfake Detection',
-    desc: 'Protect your organization from AI-generated synthetic media threats with enterprise-grade detection powered by Reality Defender & Sensity.',
+    title: 'AI Governance, Risk & Compliance',
+    desc: 'Ensure responsible AI implementation aligned with global and Nigerian regulatory standards.',
     features: [
-      'Real-time deepfake detection',
-      'Video & image authentication',
-      'Voice clone detection',
-      'API integration & monitoring'
+      'GDPR & data privacy compliance',
+      'NIST 800 & ISO 27001 frameworks',
+      'CBN & NITDA compliance',
+      'Risk assessment & mitigation'
     ],
-    result: '99.2% detection accuracy',
-    cta: 'Protect Your Organization',
-    link: '/deepfake-detection'
+    result: '100% regulatory compliance',
+    cta: 'Ensure AI Compliance',
+    link: '/consultation'
   },
 ];
 
@@ -126,12 +127,6 @@ const ServicesCards = () => {
       </div>
 
       <div className="mt-10 grid gap-4 md:grid-cols-2">
-        <Card>
-          <div className="font-semibold mb-2">AI Governance, Risk & Compliance</div>
-          <p className="text-sm text-muted-foreground">
-            Ensure responsible AI implementation aligned with Nigerian regulations.
-          </p>
-        </Card>
         <Card>
           <div className="font-semibold mb-2">AI Outsourcing</div>
           <p className="text-sm text-muted-foreground">
