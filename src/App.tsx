@@ -11,6 +11,7 @@ import SuccessStories from "./pages/SuccessStories";
 import Privacy from "./pages/Privacy";
 import TermsOfUse from "./pages/TermsOfUse";
 import DeepfakeDetection from "./pages/DeepfakeDetection";
+import DeepfakeReport from "./pages/DeepfakeReport";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,7 +31,7 @@ const App = () => (
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<TermsOfUse />} />
           <Route path="/deepfake-detection" element={<DeepfakeDetection />} />
-          
+          <Route path="/deepfake-report" element={<DeepfakeReport />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
