@@ -1,12 +1,44 @@
 import React, { useState } from 'react';
+import { z } from 'zod';
 import { Card, Button } from '../components/ui';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { useToast } from '../hooks/use-toast';
 
+// Validation schema
+const consultationSchema = z.object({
+  name: z.string()
+    .trim()
+    .min(1, 'Name is required')
+    .max(100, 'Name must be less than 100 characters'),
+  email: z.string()
+    .trim()
+    .min(1, 'Email is required')
+    .email('Please enter a valid email address')
+    .max(255, 'Email must be less than 255 characters'),
+  phone: z.string()
+    .trim()
+    .max(20, 'Phone must be less than 20 characters')
+    .optional()
+    .transform(val => val || ''),
+  type: z.enum(['free', 'audit', 'quote', 'training']),
+  city: z.string()
+    .trim()
+    .max(50, 'City must be less than 50 characters')
+    .optional()
+    .transform(val => val || ''),
+  message: z.string()
+    .trim()
+    .max(2000, 'Message must be less than 2000 characters')
+    .optional()
+    .transform(val => val || '')
+});
+
+type ConsultationForm = z.infer<typeof consultationSchema>;
+
 const Consultation = () => {
   const { toast } = useToast();
-  const [form, setForm] = useState({ 
+  const [form, setForm] = useState<ConsultationForm>({ 
     name: '', 
     email: '', 
     phone: '', 
@@ -14,16 +46,38 @@ const Consultation = () => {
     city: '', 
     message: '' 
   });
+  const [errors, setErrors] = useState<Partial<Record<keyof ConsultationForm, string>>>({});
   const [fileName, setFileName] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
     const { name, value } = e.target;
     setForm(prev => ({ ...prev, [name]: value }));
+    // Clear error when user types
+    if (errors[name as keyof ConsultationForm]) {
+      setErrors(prev => ({ ...prev, [name]: undefined }));
+    }
   }
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    setErrors({});
+    
+    // Validate form data
+    const result = consultationSchema.safeParse(form);
+    
+    if (!result.success) {
+      const fieldErrors: Partial<Record<keyof ConsultationForm, string>> = {};
+      result.error.errors.forEach((error) => {
+        const field = error.path[0] as keyof ConsultationForm;
+        if (!fieldErrors[field]) {
+          fieldErrors[field] = error.message;
+        }
+      });
+      setErrors(fieldErrors);
+      return;
+    }
+    
     setIsSubmitting(true);
     
     // Simulate form submission
@@ -106,26 +160,26 @@ ____________________
           <Card>
             <form onSubmit={handleSubmit} className="space-y-4">
               <label className="grid gap-1 text-sm">
-                <span>Full Name</span>
+                <span>Full Name *</span>
                 <input 
                   name="name" 
                   value={form.name} 
                   onChange={handleChange} 
-                  required 
-                  className="bg-input rounded-xl px-3 py-2 border border-border" 
+                  className={`bg-input rounded-xl px-3 py-2 border ${errors.name ? 'border-destructive' : 'border-border'}`} 
                 />
+                {errors.name && <span className="text-xs text-destructive">{errors.name}</span>}
               </label>
               <div className="grid gap-4 sm:grid-cols-2">
                 <label className="grid gap-1 text-sm">
-                  <span>Email</span>
+                  <span>Email *</span>
                   <input 
                     type="email" 
                     name="email" 
                     value={form.email} 
                     onChange={handleChange} 
-                    required 
-                    className="bg-input rounded-xl px-3 py-2 border border-border" 
+                    className={`bg-input rounded-xl px-3 py-2 border ${errors.email ? 'border-destructive' : 'border-border'}`} 
                   />
+                  {errors.email && <span className="text-xs text-destructive">{errors.email}</span>}
                 </label>
                 <label className="grid gap-1 text-sm">
                   <span>Phone</span>
@@ -133,8 +187,9 @@ ____________________
                     name="phone" 
                     value={form.phone} 
                     onChange={handleChange} 
-                    className="bg-input rounded-xl px-3 py-2 border border-border" 
+                    className={`bg-input rounded-xl px-3 py-2 border ${errors.phone ? 'border-destructive' : 'border-border'}`} 
                   />
+                  {errors.phone && <span className="text-xs text-destructive">{errors.phone}</span>}
                 </label>
               </div>
               <div className="grid gap-4 sm:grid-cols-2">
@@ -185,8 +240,9 @@ ____________________
                   value={form.message} 
                   onChange={handleChange} 
                   rows={4} 
-                  className="bg-input rounded-xl px-3 py-2 border border-border" 
+                  className={`bg-input rounded-xl px-3 py-2 border ${errors.message ? 'border-destructive' : 'border-border'}`} 
                 />
+                {errors.message && <span className="text-xs text-destructive">{errors.message}</span>}
               </label>
               <Button type="submit" className="w-full" disabled={isSubmitting}>
                 {isSubmitting ? 'Submitting...' : 'Submit'}

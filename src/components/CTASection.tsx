@@ -3,6 +3,7 @@ import { Button, GhostButton } from './ui';
 import { Link } from 'react-router-dom';
 import { jsPDF } from 'jspdf';
 import { useToast } from '../hooks/use-toast';
+import { generateDeepfakeReportPDF } from '../utils/deepfakeReportPdf';
 
 const CTASection = () => {
   const { toast } = useToast();
@@ -65,84 +66,23 @@ const CTASection = () => {
       y += 6;
     });
     
-    doc.save('vibe-intelligence-ai-user-guide.pdf');
+    // Open in new window
+    const pdfBlob = doc.output('blob');
+    const pdfUrl = URL.createObjectURL(pdfBlob);
+    window.open(pdfUrl, '_blank');
     
     toast({
-      title: "Download Started",
-      description: "AI User Guide PDF is being downloaded.",
+      title: "AI Guide Opened",
+      description: "The AI User Guide PDF has been opened in a new tab.",
     });
   };
 
   const handleDownloadDeepfakeReport = () => {
-    const doc = new jsPDF();
-    
-    // Title
-    doc.setFontSize(18);
-    doc.setFont('helvetica', 'bold');
-    doc.text('GLOBAL STATE OF DEEPFAKE THREATS 2026', 20, 20);
-    
-    doc.setFontSize(12);
-    doc.setFont('helvetica', 'normal');
-    doc.text('By Vibe Intelligence', 20, 30);
-    doc.text('How Vibe Intelligence Protects Nigerian Enterprises', 20, 38);
-    
-    doc.setFontSize(10);
-    let y = 55;
-    
-    const content = [
-      'EXECUTIVE SUMMARY',
-      '-----------------',
-      'The global deepfake threat landscape has evolved from a niche technological',
-      'curiosity into a sophisticated weapon of mass deception. As we enter 2026,',
-      'AI-generated synthetic media poses unprecedented risks to governments,',
-      'financial institutions, democratic processes, and individual citizens.',
-      '',
-      'KEY STATISTICS:',
-      '- 4,500% increase in deepfake attacks globally since 2022',
-      '- Nigeria ranks #3 in Africa for deepfake-related fraud',
-      '- 67% of Nigerian banks have encountered synthetic identity attempts',
-      '- 2027 elections identified as high-risk for AI-generated disinformation',
-      '',
-      'NIGERIA FOCUS AREAS:',
-      '',
-      '1. GOVERNMENT & PUBLIC SECTOR',
-      '   - Impersonation of government officials',
-      '   - Fake policy announcements',
-      '   - Document forgery',
-      '',
-      '2. DEFENSE & INTELLIGENCE',
-      '   - Military disinformation threats',
-      '   - Intelligence operation compromise',
-      '   - National security implications',
-      '',
-      '3. DEMOCRACY & ELECTORAL INTEGRITY',
-      '   - 2027 election manipulation risks',
-      '   - Political deepfake incidents',
-      '   - Voter disinformation campaigns',
-      '',
-      '4. FINANCIAL SERVICES & BANK KYC',
-      '   - Identity fraud in banking',
-      '   - Synthetic identity creation',
-      '   - CBN compliance implications',
-      '',
-      'For the full 15,000-word report, visit:',
-      'www.vibe-intelligence.com/deepfake-report',
-    ];
-    
-    content.forEach(line => {
-      if (y > 280) {
-        doc.addPage();
-        y = 20;
-      }
-      doc.text(line, 20, y);
-      y += 6;
-    });
-    
-    doc.save('vibe-intelligence-deepfake-report-2026.pdf');
+    generateDeepfakeReportPDF();
     
     toast({
-      title: "Download Started",
-      description: "Deepfake Report PDF is being downloaded.",
+      title: "Report Opened",
+      description: "The Deepfake Report PDF has been opened in a new tab.",
     });
   };
 
