@@ -320,7 +320,7 @@ Vibe Intelligence | AI Solutions for Nigerian Enterprises
     content: `DEEPFAKE VULNERABILITY ASSESSMENT
 ===================================
 Vibe Intelligence
-In Partnership with Reality Defender & Sensity
+Security Assessment Tool
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
