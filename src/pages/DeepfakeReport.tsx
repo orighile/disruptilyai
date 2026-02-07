@@ -9,6 +9,7 @@ import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
 import { useToast } from '../hooks/use-toast';
 import { generateDeepfakeReportPDF } from '../utils/deepfakeReportPdf';
+import { supabase } from '@/integrations/supabase/client';
 import { 
   Shield, 
   AlertTriangle, 
@@ -72,19 +73,57 @@ const DeepfakeReport = () => {
     
     setIsSubmitting(true);
     
-    // Simulate processing
-    await new Promise(resolve => setTimeout(resolve, 500));
-    
-    // Generate and open PDF in new tab
-    generateDeepfakeReportPDF();
-    
-    toast({
-      title: "Report Generated!",
-      description: "The Deepfake Threats Report has been opened in a new tab.",
-    });
-    
-    setFormData({ email: '', organization: '', role: '' });
-    setIsSubmitting(false);
+    try {
+      // Save subscription to database
+      const { error: dbError } = await supabase
+        .from('report_subscriptions')
+        .insert({
+          email: result.data.email,
+          organization: result.data.organization,
+          role: result.data.role || null,
+          report_type: 'deepfake-2026'
+        });
+
+      if (dbError) {
+        console.error('Database error:', dbError);
+        throw new Error('Failed to save subscription');
+      }
+
+      // Send notification email (fire and forget - don't block PDF generation)
+      supabase.functions.invoke('send-subscription-notification', {
+        body: {
+          email: result.data.email,
+          organization: result.data.organization,
+          role: result.data.role,
+          reportType: 'Global State of Deepfake Threats 2026'
+        }
+      }).then(({ error }) => {
+        if (error) {
+          console.error('Notification error:', error);
+        } else {
+          console.log('Notification sent successfully');
+        }
+      });
+
+      // Generate and open PDF in new tab
+      generateDeepfakeReportPDF();
+      
+      toast({
+        title: "Report Generated!",
+        description: "The Deepfake Threats Report has been opened in a new tab.",
+      });
+      
+      setFormData({ email: '', organization: '', role: '' });
+    } catch (error) {
+      console.error('Submission error:', error);
+      toast({
+        title: "Error",
+        description: "There was a problem processing your request. Please try again.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const stats = [
