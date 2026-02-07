@@ -11,11 +11,11 @@ const Footer = () => {
           <div>
             <img 
               src="/lovable-uploads/disruptily-logo-new.png" 
-              alt="Disruptily AI Logo"
+              alt="Vibe Intelligence Logo"
               className="h-24 mb-4"
               style={{ filter: 'drop-shadow(0 0 20px rgba(255,255,255,0.1))' }}
             />
-            <h3 className="text-lg font-bold mb-2">DISRUPTILY AI</h3>
+            <h3 className="text-lg font-bold mb-2">VIBE INTELLIGENCE</h3>
             <p className="text-sm text-muted-foreground mb-4">
               Nigeria's leading AI Business Consulting & Automation agency delivering secure, scalable, and innovative technology solutions.
             </p>
@@ -80,7 +80,7 @@ const Footer = () => {
 
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
-          <p>© {new Date().getFullYear()} Disruptily AI. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Vibe Intelligence. All rights reserved.</p>
           <div className="flex gap-6">
             <Link to="/privacy" className="hover:text-foreground transition">
               Privacy Policy

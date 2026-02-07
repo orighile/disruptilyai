@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Button } from './ui';
-import { Building2, Rocket, FlaskConical, Megaphone, Bot, GraduationCap } from 'lucide-react';
+import { Building2, Rocket, FlaskConical, Megaphone, Bot, GraduationCap, ShieldCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const cards = [
@@ -81,6 +81,19 @@ const cards = [
     ],
     result: '100+ trained, 85% certified',
     cta: 'Start AI Training'
+  },
+  {
+    icon: ShieldCheck,
+    title: 'Deepfake Detection',
+    desc: 'Protect your organization from AI-generated synthetic media threats with enterprise-grade detection powered by Reality Defender & Sensity.',
+    features: [
+      'Real-time deepfake detection',
+      'Video & image authentication',
+      'Voice clone detection',
+      'API integration & monitoring'
+    ],
+    result: '99.2% detection accuracy',
+    cta: 'Protect Your Organization'
   },
 ];
 

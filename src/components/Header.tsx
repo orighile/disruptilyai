@@ -13,7 +13,7 @@ const Header = () => {
           <Link to="/" className="flex items-center">
             <img 
               src="/lovable-uploads/disruptily-logo-new.png" 
-              alt="Disruptily AI Logo"
+              alt="Vibe Intelligence Logo"
               className="h-36 w-auto"
               style={{ filter: 'drop-shadow(0 0 20px rgba(255,255,255,0.1))' }}
             />

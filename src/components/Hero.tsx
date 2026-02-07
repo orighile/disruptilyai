@@ -23,7 +23,7 @@ const Hero = () => {
               From automation to intelligence, we build systems that scale with your ambitions.
             </p>
             <p className="text-lg text-muted-foreground max-w-2xl">
-              At Disruptily AI, we empower organizations across Nigeria to harness the transformative 
+              At Vibe Intelligence, we empower organizations across Nigeria to harness the transformative 
               power of artificial intelligence. Whether you're looking to automate repetitive tasks, 
               gain deeper insights from your data, or create intelligent customer experiences, our 
               team of experts delivers tailored AI solutions that drive measurable results. We understand 
