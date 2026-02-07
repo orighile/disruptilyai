@@ -23,6 +23,9 @@ const Header = () => {
             <Link to="/services" className="text-sm hover:text-accent-400 transition">
               Services
             </Link>
+            <Link to="/deepfake-detection" className="text-sm hover:text-accent-400 transition">
+              Deepfake Detection
+            </Link>
             <Link to="/success-stories" className="text-sm hover:text-accent-400 transition">
               Success Stories
             </Link>
@@ -53,6 +56,13 @@ const Header = () => {
                 onClick={() => setIsOpen(false)}
               >
                 Services
+              </Link>
+              <Link 
+                to="/deepfake-detection" 
+                className="text-sm hover:text-accent-400 transition"
+                onClick={() => setIsOpen(false)}
+              >
+                Deepfake Detection
               </Link>
               <Link 
                 to="/success-stories" 
