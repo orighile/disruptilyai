@@ -1,9 +1,33 @@
 import React, { useState } from 'react';
-import { Card, Button } from '../components/ui';
+import { Link } from 'react-router-dom';
+import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
+import { Button } from '../components/ui/button';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { useToast } from '../hooks/use-toast';
-import { Download, FileText, BookOpen, BarChart3, Building2, Calculator } from 'lucide-react';
+import { 
+  Download, 
+  FileText, 
+  BookOpen, 
+  BarChart3, 
+  Calculator,
+  Shield,
+  ClipboardCheck,
+  FolderSearch,
+  ArrowRight,
+  AlertTriangle
+} from 'lucide-react';
+import { templates } from '../data/templates';
+
+// Icon mapping for templates
+const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+  FileText,
+  BarChart3,
+  Shield,
+  ClipboardCheck,
+  FolderSearch,
+  Calculator
+};
 
 function ROI() {
   const [revenue, setRevenue] = useState(5000000);
@@ -14,9 +38,9 @@ function ROI() {
   const roi = cost ? ((added - cost) / cost) * 100 : 0;
 
   return (
-    <Card>
+    <Card className="p-6">
       <div className="flex items-center gap-2 mb-4">
-        <Calculator className="w-5 h-5 text-accent-500" />
+        <Calculator className="w-5 h-5 text-primary" />
         <div className="font-semibold">AI ROI Calculator (Nigeria)</div>
       </div>
       <div className="grid gap-3 sm:grid-cols-3 mb-4">
@@ -64,9 +88,9 @@ function TimelineEstimator() {
   const weeks = 2 + complexity * 2 + integrations;
 
   return (
-    <Card>
+    <Card className="p-6">
       <div className="flex items-center gap-2 mb-4">
-        <BarChart3 className="w-5 h-5 text-accent-500" />
+        <BarChart3 className="w-5 h-5 text-primary" />
         <div className="font-semibold">Implementation Timeline Estimator</div>
       </div>
       <div className="grid gap-3 sm:grid-cols-2 mb-4">
@@ -78,7 +102,7 @@ function TimelineEstimator() {
             max="4" 
             value={complexity} 
             onChange={e => setComplexity(+e.target.value)} 
-            className="w-full accent-accent-500"
+            className="w-full accent-primary"
           />
           <span className="text-xs text-muted-foreground">Level {complexity}</span>
         </label>
@@ -90,7 +114,7 @@ function TimelineEstimator() {
             max="6" 
             value={integrations} 
             onChange={e => setIntegrations(+e.target.value)} 
-            className="w-full accent-accent-500"
+            className="w-full accent-primary"
           />
           <span className="text-xs text-muted-foreground">{integrations} systems</span>
         </label>
@@ -102,13 +126,145 @@ function TimelineEstimator() {
   );
 }
 
-const resourceItems = [
-  {
-    icon: BookOpen,
-    title: 'AI User Guide',
-    desc: 'Complete guide for Nigerian businesses to adopt and scale AI solutions.',
-    filename: 'vibe-intelligence-ai-user-guide.txt',
-    content: `AI USER GUIDE FOR NIGERIAN BUSINESSES
+const Resources = () => {
+  const { toast } = useToast();
+
+  function handleDownload(template: typeof templates[0]) {
+    const blob = new Blob([template.content], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = template.filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    
+    toast({
+      title: "Download Started",
+      description: `${template.title} is being downloaded.`,
+    });
+  }
+
+  return (
+    <div className="min-h-screen bg-background">
+      <Header />
+      <div className="container py-12 md:py-16">
+        <h1 className="text-3xl md:text-4xl font-bold mb-4">Resources</h1>
+        <p className="text-muted-foreground max-w-3xl mb-8">
+          Tools, templates, and insights for Nigerian businesses investing in AI and cybersecurity.
+        </p>
+
+        {/* Featured Report Section */}
+        <section className="mb-12">
+          <Card className="bg-gradient-to-br from-destructive/10 via-background to-primary/10 border-destructive/20">
+            <CardContent className="p-6 md:p-8">
+              <div className="flex flex-col md:flex-row gap-6 items-start">
+                <div className="flex-shrink-0">
+                  <div className="w-16 h-16 rounded-full bg-destructive/10 flex items-center justify-center">
+                    <AlertTriangle className="w-8 h-8 text-destructive" />
+                  </div>
+                </div>
+                <div className="flex-grow">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-destructive/10 text-destructive text-sm font-medium mb-3">
+                    <Shield className="w-3 h-3" />
+                    Featured Report
+                  </div>
+                  <h2 className="text-2xl md:text-3xl font-bold mb-3">
+                    Global State of Deepfake Threats 2026
+                  </h2>
+                  <p className="text-muted-foreground mb-4">
+                    Comprehensive threat intelligence report with emphasis on Nigeria—covering Government, 
+                    Defense & Intelligence, Electoral Integrity, and Bank KYC vulnerabilities. 
+                    In partnership with Reality Defender & Sensity.
+                  </p>
+                  <div className="flex flex-wrap gap-4 text-sm text-muted-foreground mb-6">
+                    <span>📊 15,000+ words</span>
+                    <span>🌍 Global coverage</span>
+                    <span>🇳🇬 Nigeria focus</span>
+                    <span>📋 12 case studies</span>
+                  </div>
+                  <Button asChild>
+                    <Link to="/deepfake-report" className="inline-flex items-center gap-2">
+                      Read Excerpt & Subscribe
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </section>
+
+        {/* Interactive Tools */}
+        <section className="mb-12">
+          <h2 className="text-xl font-semibold mb-4">Interactive Tools</h2>
+          <div className="grid gap-6 md:grid-cols-2">
+            <ROI />
+            <TimelineEstimator />
+          </div>
+        </section>
+
+        {/* Professional Templates */}
+        <section className="mb-12">
+          <h2 className="text-xl font-semibold mb-4">Professional Templates</h2>
+          <p className="text-muted-foreground mb-6">
+            Download our comprehensive templates to prepare for AI initiatives, assess risks, and build business cases.
+          </p>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {templates.map((template) => {
+              const IconComponent = iconMap[template.icon] || FileText;
+              return (
+                <Card key={template.id} className="flex flex-col h-full">
+                  <CardHeader className="pb-3">
+                    <div className="flex items-center gap-2">
+                      <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                        <IconComponent className="w-5 h-5 text-primary" />
+                      </div>
+                      <CardTitle className="text-lg">{template.title}</CardTitle>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="flex-grow flex flex-col">
+                    <p className="text-sm text-muted-foreground mb-4 flex-grow">
+                      {template.description}
+                    </p>
+                    <Button 
+                      variant="outline" 
+                      onClick={() => handleDownload(template)}
+                      className="w-full"
+                    >
+                      <Download className="w-4 h-4 mr-2" />
+                      Download Template
+                    </Button>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* Quick Resources */}
+        <section>
+          <h2 className="text-xl font-semibold mb-4">Quick Resources</h2>
+          <div className="grid gap-4 md:grid-cols-2">
+            <Card className="p-6">
+              <div className="flex items-start gap-4">
+                <BookOpen className="w-8 h-8 text-primary flex-shrink-0" />
+                <div>
+                  <h3 className="font-semibold mb-2">AI User Guide for Nigerian Businesses</h3>
+                  <p className="text-sm text-muted-foreground mb-3">
+                    Complete guide covering AI adoption, implementation, scaling, and compliance for the Nigerian market.
+                  </p>
+                  <Button 
+                    variant="link" 
+                    className="p-0 h-auto"
+                    onClick={() => handleDownload({
+                      id: 'ai-guide',
+                      title: 'AI User Guide',
+                      description: '',
+                      icon: 'BookOpen',
+                      filename: 'vibe-intelligence-ai-user-guide.txt',
+                      content: `AI USER GUIDE FOR NIGERIAN BUSINESSES
 =====================================
 By Vibe Intelligence
 
@@ -143,56 +299,32 @@ CHAPTER 5: COMPLIANCE & GOVERNANCE
 
 For consultation, contact: sales@disruptily.com
 `
-  },
-  {
-    icon: FileText,
-    title: 'Preconsultation Templates',
-    desc: 'Templates to help prepare for your AI consultation session.',
-    filename: 'vibe-intelligence-preconsultation-template.txt',
-    content: `PRE-CONSULTATION QUESTIONNAIRE
-================================
-Vibe Intelligence
-
-Company Name: ____________________
-Contact Person: ____________________
-Email: ____________________
-Phone: ____________________
-
-1. Top 3 business outcomes you want from AI:
-   a) ____________________
-   b) ____________________
-   c) ____________________
-
-2. Data sources available:
-   [ ] CRM System
-   [ ] ERP System
-   [ ] Website Analytics
-   [ ] Spreadsheets/Excel
-   [ ] Other: ____________________
-
-3. Channels to automate:
-   [ ] WhatsApp
-   [ ] Email
-   [ ] Website/Web Chat
-   [ ] POS System
-   [ ] Other: ____________________
-
-4. Compliance constraints:
-   [ ] NITDA
-   [ ] CBN
-   [ ] GDPR
-   [ ] Other: ____________________
-
-5. Timeline: ____________________
-6. Budget range: ____________________
-`
-  },
-  {
-    icon: BarChart3,
-    title: 'State of AI in Nigeria (2025)',
-    desc: 'Download the latest insights and adoption trends in Nigeria.',
-    filename: 'state-of-ai-nigeria-2025.txt',
-    content: `STATE OF AI IN NIGERIA - 2025 REPORT
+                    })}
+                  >
+                    <Download className="w-4 h-4 mr-1" />
+                    Download Guide
+                  </Button>
+                </div>
+              </div>
+            </Card>
+            <Card className="p-6">
+              <div className="flex items-start gap-4">
+                <BarChart3 className="w-8 h-8 text-primary flex-shrink-0" />
+                <div>
+                  <h3 className="font-semibold mb-2">State of AI in Nigeria 2025</h3>
+                  <p className="text-sm text-muted-foreground mb-3">
+                    Latest insights on AI adoption trends, key use cases, and industry benchmarks across Nigerian enterprises.
+                  </p>
+                  <Button 
+                    variant="link" 
+                    className="p-0 h-auto"
+                    onClick={() => handleDownload({
+                      id: 'state-ai',
+                      title: 'State of AI Nigeria 2025',
+                      description: '',
+                      icon: 'BarChart3',
+                      filename: 'state-of-ai-nigeria-2025.txt',
+                      content: `STATE OF AI IN NIGERIA - 2025 REPORT
 =====================================
 By Vibe Intelligence
 
@@ -232,167 +364,16 @@ OPPORTUNITIES
 
 For the full report, contact: sales@disruptily.com
 `
-  },
-  {
-    icon: Building2,
-    title: 'Automation Opportunity Assessment',
-    desc: 'Self-service audit to locate automation quick wins.',
-    filename: 'automation-opportunity-assessment.txt',
-    content: `AUTOMATION OPPORTUNITY ASSESSMENT
-==================================
-Vibe Intelligence Self-Service Audit
-
-Rate each area from 1-5 (1=Low potential, 5=High potential)
-
-CUSTOMER OPERATIONS
--------------------
-[ ] Customer inquiry handling: ___
-[ ] Order processing: ___
-[ ] Appointment scheduling: ___
-[ ] Feedback collection: ___
-
-FINANCE & ACCOUNTING
---------------------
-[ ] Invoice processing: ___
-[ ] Expense reporting: ___
-[ ] Financial reconciliation: ___
-[ ] Report generation: ___
-
-HUMAN RESOURCES
----------------
-[ ] Recruitment screening: ___
-[ ] Onboarding processes: ___
-[ ] Leave management: ___
-[ ] Performance tracking: ___
-
-MARKETING & SALES
------------------
-[ ] Lead qualification: ___
-[ ] Email campaigns: ___
-[ ] Social media posting: ___
-[ ] Sales follow-ups: ___
-
-SCORING
--------
-40-50: High automation potential - Contact us immediately
-30-39: Moderate potential - Schedule a consultation
-20-29: Selective opportunities - Review specific areas
-Below 20: Focus on digital foundation first
-
-Next steps: Book a free consultation at vibe-intelligence.com
-`
-  },
-  {
-    icon: FileText,
-    title: 'Industry Guides',
-    desc: 'Banking, E-commerce, Manufacturing, Healthcare.',
-    filename: 'industry-ai-guides.txt',
-    content: `INDUSTRY-SPECIFIC AI GUIDES
-===========================
-By Vibe Intelligence
-
-BANKING & FINTECH
------------------
-Key Applications:
-• Fraud detection & prevention
-• Credit scoring automation
-• Customer service chatbots
-• KYC/AML compliance
-• Personalized banking
-
-Compliance: CBN guidelines, NITDA regulations
-
-E-COMMERCE
-----------
-Key Applications:
-• Product recommendations
-• Inventory optimization
-• Customer segmentation
-• Dynamic pricing
-• Chatbot support
-
-Focus: Customer experience & logistics
-
-MANUFACTURING
--------------
-Key Applications:
-• Predictive maintenance
-• Quality control
-• Supply chain optimization
-• Energy management
-• Production scheduling
-
-Focus: Efficiency & cost reduction
-
-HEALTHCARE
-----------
-Key Applications:
-• Diagnostic assistance
-• Patient scheduling
-• Medical records management
-• Drug interaction checking
-• Telemedicine support
-
-Compliance: Patient data protection
-
-For industry-specific consultation: sales@disruptily.com
-`
-  }
-];
-
-const Resources = () => {
-  const { toast } = useToast();
-
-  function handleDownload(item: typeof resourceItems[0]) {
-    const blob = new Blob([item.content], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = item.filename;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-    
-    toast({
-      title: "Download Started",
-      description: `${item.title} is being downloaded.`,
-    });
-  }
-
-  return (
-    <div className="min-h-screen">
-      <Header />
-      <div className="container py-12 md:py-16">
-        <h1 className="text-3xl md:text-4xl font-bold mb-4">Resources</h1>
-        <p className="text-muted-foreground max-w-3xl mb-8">
-          Tools, templates, and insights for Nigerian businesses investing in AI.
-        </p>
-
-        <div className="grid gap-6 md:grid-cols-2 mb-8">
-          <ROI />
-          <TimelineEstimator />
-        </div>
-
-        <h2 className="text-xl font-semibold mb-4">Downloadable Resources</h2>
-        <div className="grid gap-6 md:grid-cols-3">
-          {resourceItems.map((item, i) => (
-            <Card key={i} className="flex flex-col h-full">
-              <div className="flex items-center gap-2 mb-2">
-                <item.icon className="w-5 h-5 text-accent-500 flex-shrink-0" />
-                <div className="font-semibold">{item.title}</div>
+                    })}
+                  >
+                    <Download className="w-4 h-4 mr-1" />
+                    Download Report
+                  </Button>
+                </div>
               </div>
-              <p className="text-sm text-muted-foreground mb-4 flex-grow">{item.desc}</p>
-              <button 
-                onClick={() => handleDownload(item)}
-                className="inline-flex items-center gap-2 text-sm text-accent-500 hover:text-accent-400 transition"
-              >
-                <Download className="w-4 h-4" />
-                Download →
-              </button>
             </Card>
-          ))}
-        </div>
+          </div>
+        </section>
       </div>
       <Footer />
     </div>
