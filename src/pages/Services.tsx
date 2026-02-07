@@ -3,6 +3,7 @@ import { Card } from '../components/ui';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import CTASection from '../components/CTASection';
+import ServicesCards from '../components/ServicesCards';
 
 const tiers = [
   { 
@@ -116,6 +117,8 @@ const Services = () => {
           </div>
         </div>
       </div>
+
+      <ServicesCards />
 
       <CTASection />
       <Footer />

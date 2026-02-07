@@ -10,10 +10,9 @@ const Footer = () => {
           {/* Company Info */}
           <div>
             <img 
-              src="/lovable-uploads/disruptily-logo-new.png" 
+              src="/lovable-uploads/vibe-intelligence-logo.png" 
               alt="Vibe Intelligence Logo"
-              className="h-24 mb-4"
-              style={{ filter: 'drop-shadow(0 0 20px rgba(255,255,255,0.1))' }}
+              className="h-20 mb-4"
             />
             <h3 className="text-lg font-bold mb-2">VIBE INTELLIGENCE</h3>
             <p className="text-sm text-muted-foreground mb-4">
@@ -41,8 +40,8 @@ const Footer = () => {
             <Link to="/services" className="text-muted-foreground hover:text-foreground transition">
               AI Integration
             </Link>
-            <Link to="/services" className="text-muted-foreground hover:text-foreground transition">
-              Process Optimization
+            <Link to="/deepfake-detection" className="text-muted-foreground hover:text-foreground transition">
+              Deepfake Detection
             </Link>
           </nav>
 
