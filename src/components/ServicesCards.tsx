@@ -93,7 +93,8 @@ const cards = [
       'API integration & monitoring'
     ],
     result: '99.2% detection accuracy',
-    cta: 'Protect Your Organization'
+    cta: 'Protect Your Organization',
+    link: '/deepfake-detection'
   },
 ];
 
@@ -116,7 +117,7 @@ const ServicesCards = () => {
             </ul>
             <div className="text-xs text-muted-foreground mb-4">{card.result}</div>
             <div className="mt-auto">
-              <Button as={Link} to="/consultation" size="sm">
+              <Button as={Link} to={(card as any).link || "/consultation"} size="sm">
                 {card.cta}
               </Button>
             </div>
