@@ -103,7 +103,6 @@ const Services = () => {
                   ['Deepfake Detection','✓','✓','✓'],
                   ['Marketing Automation','•','✓','✓'],
                   ['Custom Agents','•','✓','✓'],
-                  ['Legacy Integration','—','•','✓'],
                   ['Governance, Risk & Compliance','—','•','✓'],
                 ].map((row, i) => (
                   <tr key={i} className="border-t border-white/10">

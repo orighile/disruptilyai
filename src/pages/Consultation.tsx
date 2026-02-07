@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { Card, Button } from '../components/ui';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { useToast } from '../hooks/use-toast';
 
 const Consultation = () => {
+  const { toast } = useToast();
   const [form, setForm] = useState({ 
     name: '', 
     email: '', 
@@ -13,6 +15,7 @@ const Consultation = () => {
     message: '' 
   });
   const [fileName, setFileName] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
     const { name, value } = e.target;
@@ -21,9 +24,75 @@ const Consultation = () => {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    alert('Form ready for integration. Collected data: ' + JSON.stringify(form, null, 2));
+    setIsSubmitting(true);
+    
+    // Simulate form submission
+    setTimeout(() => {
+      toast({
+        title: "Request Submitted!",
+        description: "We'll contact you within 24 hours to confirm your consultation.",
+      });
+      setForm({ name: '', email: '', phone: '', type: 'free', city: '', message: '' });
+      setFileName('');
+      setIsSubmitting(false);
+    }, 1000);
   }
 
+  function handleDownloadTemplate() {
+    // Create a simple template content
+    const templateContent = `PRE-CONSULTATION QUESTIONNAIRE
+================================
+
+Company Name: ____________________
+Contact Person: ____________________
+Email: ____________________
+Phone: ____________________
+
+1. Top 3 business outcomes you want from AI:
+   a) ____________________
+   b) ____________________
+   c) ____________________
+
+2. Data sources available (check all that apply):
+   [ ] CRM System
+   [ ] ERP System
+   [ ] Website Analytics
+   [ ] Spreadsheets/Excel
+   [ ] Other: ____________________
+
+3. Channels to automate (check all that apply):
+   [ ] WhatsApp
+   [ ] Email
+   [ ] Website/Web Chat
+   [ ] POS System
+   [ ] Other: ____________________
+
+4. Compliance constraints:
+   [ ] NITDA
+   [ ] CBN
+   [ ] GDPR
+   [ ] Other: ____________________
+
+5. Timeline: ____________________
+
+6. Budget range: ____________________
+
+7. Additional notes:
+____________________
+____________________
+____________________
+`;
+
+    const blob = new Blob([templateContent], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'vibe-intelligence-consultation-template.txt';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
   return (
     <div className="min-h-screen">
       <Header />
@@ -119,8 +188,8 @@ const Consultation = () => {
                   className="bg-input rounded-xl px-3 py-2 border border-border" 
                 />
               </label>
-              <Button type="submit" className="w-full">
-                Submit
+              <Button type="submit" className="w-full" disabled={isSubmitting}>
+                {isSubmitting ? 'Submitting...' : 'Submit'}
               </Button>
             </form>
           </Card>
@@ -134,9 +203,12 @@ const Consultation = () => {
               <li>Compliance constraints (NITDA/CBN)?</li>
               <li>Timeline and budget window?</li>
             </ul>
-            <a className="text-sm text-accent-500 hover:text-accent-400 transition" href="#">
+            <button 
+              onClick={handleDownloadTemplate}
+              className="text-sm text-accent-500 hover:text-accent-400 transition"
+            >
               Download template →
-            </a>
+            </button>
           </Card>
         </div>
       </div>

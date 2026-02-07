@@ -37,11 +37,11 @@ const Footer = () => {
             <Link to="/services" className="text-muted-foreground hover:text-foreground transition">
               Business Automation
             </Link>
-            <Link to="/services" className="text-muted-foreground hover:text-foreground transition">
-              AI Integration
-            </Link>
             <Link to="/deepfake-detection" className="text-muted-foreground hover:text-foreground transition">
               Deepfake Detection
+            </Link>
+            <Link to="/consultation" className="text-muted-foreground hover:text-foreground transition">
+              GRC Compliance
             </Link>
           </nav>
 
