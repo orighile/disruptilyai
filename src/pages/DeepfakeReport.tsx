@@ -68,8 +68,11 @@ const DeepfakeReport = () => {
               Global State of<br />
               <span className="text-primary">Deepfake Threats 2026</span>
             </h1>
-            <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              By Vibe Intelligence in Partnership with Reality Defender & Sensity
+            <p className="text-xl text-muted-foreground mb-4 max-w-2xl mx-auto">
+              By Vibe Intelligence
+            </p>
+            <p className="text-lg text-primary font-medium mb-8 max-w-2xl mx-auto">
+              How Vibe Intelligence Protects Nigerian Enterprises from Synthetic Media Threats
             </p>
             <div className="flex flex-wrap justify-center gap-4 text-sm text-muted-foreground">
               <span className="flex items-center gap-2">
@@ -126,8 +129,7 @@ const DeepfakeReport = () => {
                   processes, and individual citizens worldwide.
                 </p>
                 <p>
-                  This report, compiled through extensive research by Vibe Intelligence in partnership with 
-                  leading detection providers Reality Defender and Sensity, presents the most comprehensive 
+                  This report, compiled through extensive research by Vibe Intelligence, presents the most comprehensive
                   analysis of deepfake threats ever assembled for the African market, with particular emphasis 
                   on Nigeria—a nation at the nexus of rapid digital transformation and heightened vulnerability.
                 </p>
@@ -361,8 +363,8 @@ const DeepfakeReport = () => {
             Need Immediate Deepfake Protection?
           </h2>
           <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Our team partners with Reality Defender and Sensity to provide enterprise-grade 
-            deepfake detection for Nigerian organizations.
+            Vibe Intelligence provides enterprise-grade deepfake detection and AI security 
+            solutions for Nigerian organizations.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Button asChild size="lg">

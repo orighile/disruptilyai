@@ -18,6 +18,7 @@ import {
   AlertTriangle
 } from 'lucide-react';
 import { templates } from '../data/templates';
+import { generateTemplatePDF, generatePDF } from '../utils/pdfGenerator';
 
 // Icon mapping for templates
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -130,19 +131,25 @@ const Resources = () => {
   const { toast } = useToast();
 
   function handleDownload(template: typeof templates[0]) {
-    const blob = new Blob([template.content], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = template.filename;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+    generateTemplatePDF(template);
     
     toast({
       title: "Download Started",
-      description: `${template.title} is being downloaded.`,
+      description: `${template.title} PDF is being downloaded.`,
+    });
+  }
+
+  function handleDownloadGuide(guideContent: { title: string; content: string; filename: string }) {
+    generatePDF({
+      title: guideContent.title,
+      subtitle: 'Vibe Intelligence',
+      content: guideContent.content,
+      filename: guideContent.filename,
+    });
+    
+    toast({
+      title: "Download Started",
+      description: `${guideContent.title} PDF is being downloaded.`,
     });
   }
 
@@ -173,10 +180,12 @@ const Resources = () => {
                   <h2 className="text-2xl md:text-3xl font-bold mb-3">
                     Global State of Deepfake Threats 2026
                   </h2>
+                  <p className="text-lg text-primary font-medium mb-2">
+                    How Vibe Intelligence Protects Nigerian Enterprises
+                  </p>
                   <p className="text-muted-foreground mb-4">
                     Comprehensive threat intelligence report with emphasis on Nigeria—covering Government, 
-                    Defense & Intelligence, Electoral Integrity, and Bank KYC vulnerabilities. 
-                    In partnership with Reality Defender & Sensity.
+                    Defense & Intelligence, Electoral Integrity, and Bank KYC vulnerabilities.
                   </p>
                   <div className="flex flex-wrap gap-4 text-sm text-muted-foreground mb-6">
                     <span>📊 15,000+ words</span>
@@ -210,6 +219,7 @@ const Resources = () => {
           <h2 className="text-xl font-semibold mb-4">Professional Templates</h2>
           <p className="text-muted-foreground mb-6">
             Download our comprehensive templates to prepare for AI initiatives, assess risks, and build business cases.
+            All templates are available as professional PDF documents.
           </p>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {templates.map((template) => {
@@ -234,7 +244,7 @@ const Resources = () => {
                       className="w-full"
                     >
                       <Download className="w-4 h-4 mr-2" />
-                      Download Template
+                      Download PDF
                     </Button>
                   </CardContent>
                 </Card>
@@ -258,17 +268,10 @@ const Resources = () => {
                   <Button 
                     variant="link" 
                     className="p-0 h-auto"
-                    onClick={() => handleDownload({
-                      id: 'ai-guide',
-                      title: 'AI User Guide',
-                      description: '',
-                      icon: 'BookOpen',
-                      filename: 'vibe-intelligence-ai-user-guide.txt',
-                      content: `AI USER GUIDE FOR NIGERIAN BUSINESSES
-=====================================
-By Vibe Intelligence
-
-INTRODUCTION
+                    onClick={() => handleDownloadGuide({
+                      title: 'AI User Guide for Nigerian Businesses',
+                      filename: 'vibe-intelligence-ai-user-guide.pdf',
+                      content: `INTRODUCTION
 ------------
 This guide provides a comprehensive overview of how Nigerian businesses can adopt, implement, and scale AI solutions effectively.
 
@@ -297,12 +300,12 @@ CHAPTER 5: COMPLIANCE & GOVERNANCE
 - CBN Regulations
 - Data Protection Best Practices
 
-For consultation, contact: sales@disruptily.com
+For consultation, contact: info@vibe-intelligence.com
 `
                     })}
                   >
                     <Download className="w-4 h-4 mr-1" />
-                    Download Guide
+                    Download PDF
                   </Button>
                 </div>
               </div>
@@ -318,17 +321,10 @@ For consultation, contact: sales@disruptily.com
                   <Button 
                     variant="link" 
                     className="p-0 h-auto"
-                    onClick={() => handleDownload({
-                      id: 'state-ai',
-                      title: 'State of AI Nigeria 2025',
-                      description: '',
-                      icon: 'BarChart3',
-                      filename: 'state-of-ai-nigeria-2025.txt',
-                      content: `STATE OF AI IN NIGERIA - 2025 REPORT
-=====================================
-By Vibe Intelligence
-
-EXECUTIVE SUMMARY
+                    onClick={() => handleDownloadGuide({
+                      title: 'State of AI in Nigeria - 2025 Report',
+                      filename: 'state-of-ai-nigeria-2025.pdf',
+                      content: `EXECUTIVE SUMMARY
 -----------------
 AI adoption in Nigeria has accelerated significantly, with key sectors leading the transformation.
 
@@ -362,12 +358,12 @@ OPPORTUNITIES
 • Increasing mobile penetration
 • Youth-driven innovation
 
-For the full report, contact: sales@disruptily.com
+For the full report, contact: info@vibe-intelligence.com
 `
                     })}
                   >
                     <Download className="w-4 h-4 mr-1" />
-                    Download Report
+                    Download PDF
                   </Button>
                 </div>
               </div>

@@ -4,7 +4,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import CTASection from '../components/CTASection';
 import { Card, Button } from '../components/ui';
-import { ShieldCheck, Eye, Mic, Video, Image, Globe, Zap, Lock } from 'lucide-react';
+import { ShieldCheck, Eye, Mic, Video, Image, Globe, Zap, Lock, Brain, Scan } from 'lucide-react';
 
 const DeepfakeDetection = () => {
   return (
@@ -16,15 +16,15 @@ const DeepfakeDetection = () => {
         <div className="max-w-4xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 glass rounded-full px-4 py-2 text-sm mb-6">
             <ShieldCheck className="w-4 h-4 text-accent-500" />
-            Powered by Reality Defender & Sensity
+            Vibe Intelligence Security Solutions
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
             AI-Powered <span className="text-gradient">Deepfake Detection</span>
           </h1>
           <p className="text-xl text-muted-foreground mb-8">
             Protect your organization from AI-generated synthetic media threats with enterprise-grade 
-            detection technology. Our partnerships with industry leaders Reality Defender and Sensity 
-            deliver unmatched accuracy in identifying manipulated content.
+            detection technology. Vibe Intelligence delivers unmatched accuracy in identifying 
+            manipulated content, tailored for the Nigerian market.
           </p>
           <Button as={Link} to="/consultation" size="lg">
             Request a Demo
@@ -49,22 +49,21 @@ const DeepfakeDetection = () => {
         </div>
       </section>
 
-      {/* Partnership Section */}
+      {/* Technology Section */}
       <section className="container py-16">
-        <h2 className="text-3xl font-bold text-center mb-12">Our Technology Partners</h2>
+        <h2 className="text-3xl font-bold text-center mb-12">Our Technology</h2>
         <div className="grid gap-8 md:grid-cols-2">
           <Card className="p-8">
             <div className="flex items-center gap-4 mb-4">
               <div className="w-12 h-12 rounded-full bg-accent-500/20 flex items-center justify-center">
-                <ShieldCheck className="w-6 h-6 text-accent-500" />
+                <Brain className="w-6 h-6 text-accent-500" />
               </div>
-              <h3 className="text-2xl font-bold">Reality Defender</h3>
+              <h3 className="text-2xl font-bold">Multi-Modal AI Detection</h3>
             </div>
             <p className="text-muted-foreground mb-4">
-              Reality Defender provides cutting-edge AI detection technology trusted by governments, 
-              financial institutions, and media organizations worldwide. Their multi-modal detection 
-              system analyzes visual, audio, and behavioral patterns to identify synthetic content 
-              with industry-leading accuracy.
+              Our proprietary multi-modal detection system analyzes visual, audio, and behavioral 
+              patterns simultaneously to identify synthetic content with industry-leading accuracy.
+              Built specifically to address threats facing Nigerian enterprises.
             </p>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li className="flex items-center gap-2">
@@ -77,7 +76,7 @@ const DeepfakeDetection = () => {
               </li>
               <li className="flex items-center gap-2">
                 <Globe className="w-4 h-4 text-accent-400" />
-                Global threat intelligence
+                Nigeria-focused threat intelligence
               </li>
             </ul>
           </Card>
@@ -85,14 +84,14 @@ const DeepfakeDetection = () => {
           <Card className="p-8">
             <div className="flex items-center gap-4 mb-4">
               <div className="w-12 h-12 rounded-full bg-accent-500/20 flex items-center justify-center">
-                <Eye className="w-6 h-6 text-accent-500" />
+                <Scan className="w-6 h-6 text-accent-500" />
               </div>
-              <h3 className="text-2xl font-bold">Sensity</h3>
+              <h3 className="text-2xl font-bold">Advanced Visual Analysis</h3>
             </div>
             <p className="text-muted-foreground mb-4">
-              Sensity is a pioneer in visual threat intelligence, specializing in the detection of 
-              AI-generated faces and manipulated imagery. Their technology protects organizations 
-              from identity fraud, disinformation campaigns, and synthetic media attacks.
+              Vibe Intelligence specializes in the detection of AI-generated faces and manipulated 
+              imagery. Our technology protects organizations from identity fraud, disinformation 
+              campaigns, and synthetic media attacks targeting the Nigerian market.
             </p>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li className="flex items-center gap-2">
