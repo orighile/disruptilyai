@@ -1,27 +1,27 @@
 import React from 'react';
 import { Card } from './ui';
-import { ShieldCheck, Globe2, Wifi, Languages } from 'lucide-react';
+import { ShieldCheck, Globe2, Shield, Bot } from 'lucide-react';
 
 const items = [
   { 
     icon: ShieldCheck, 
-    title: 'Regulatory Compliance', 
-    desc: 'NITDA, CBN, and local data protection standards' 
+    title: 'GRC Compliance', 
+    desc: 'GDPR, NIST 800, ISO 27001 plus NITDA, CBN local standards' 
   },
   { 
-    icon: Wifi, 
-    title: 'Infrastructure Aware', 
-    desc: 'Built for Nigerian connectivity realities' 
+    icon: Shield, 
+    title: 'Deepfake Detection', 
+    desc: 'Enterprise-grade synthetic media threat protection' 
   },
   { 
-    icon: Languages, 
-    title: 'Multi-Cultural', 
-    desc: 'English, Pidgin, and regional practices' 
+    icon: Bot, 
+    title: 'AI Consulting', 
+    desc: 'Strategic AI transformation and implementation' 
   },
   { 
     icon: Globe2, 
-    title: 'Local Expertise', 
-    desc: 'Deep understanding of Nigerian market dynamics' 
+    title: 'Business Transformation', 
+    desc: 'End-to-end digital modernization with AI' 
   },
 ];
 

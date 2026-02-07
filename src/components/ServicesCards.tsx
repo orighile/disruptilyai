@@ -1,13 +1,13 @@
 import React from 'react';
 import { Card, Button } from './ui';
-import { Building2, Rocket, FlaskConical, Megaphone, Bot, GraduationCap, ShieldCheck } from 'lucide-react';
+import { Building2, Rocket, Megaphone, Bot, ShieldCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const cards = [
   {
     icon: ShieldCheck,
     title: 'Deepfake Detection',
-    desc: 'Protect your organization from AI-generated synthetic media threats with enterprise-grade detection powered by Reality Defender & Sensity.',
+    desc: 'Protect your organization from AI-generated synthetic media threats with enterprise-grade detection.',
     features: [
       'Real-time deepfake detection',
       'Video & image authentication',
@@ -17,6 +17,20 @@ const cards = [
     result: '99.2% detection accuracy',
     cta: 'Protect Your Organization',
     link: '/deepfake-detection'
+  },
+  {
+    icon: ShieldCheck,
+    title: 'AI Governance, Risk & Compliance',
+    desc: 'Ensure responsible AI implementation aligned with global and Nigerian regulatory standards.',
+    features: [
+      'GDPR & data privacy compliance',
+      'NIST 800 & ISO 27001 frameworks',
+      'CBN & NITDA compliance',
+      'Risk assessment & mitigation'
+    ],
+    result: '100% regulatory compliance',
+    cta: 'Ensure AI Compliance',
+    link: '/consultation'
   },
   {
     icon: Building2,
@@ -45,19 +59,6 @@ const cards = [
     cta: 'Accelerate Your Startup'
   },
   {
-    icon: FlaskConical,
-    title: 'AI Proof of Concept',
-    desc: 'Validate AI ideas with minimal risk via comprehensive PoCs that prove feasibility and ROI.',
-    features: [
-      'Rapid prototyping',
-      'ROI & business case',
-      'Feasibility assessment',
-      'Risk mitigation'
-    ],
-    result: '90% PoC → production',
-    cta: 'Validate Your AI Idea'
-  },
-  {
     icon: Megaphone,
     title: 'AI Marketing Automation',
     desc: 'Deploy AI-powered campaigns that understand Nigerian customer behavior and scale personalization.',
@@ -82,20 +83,6 @@ const cards = [
     ],
     result: '24/7 ops, 95% CSAT',
     cta: 'Deploy AI Agents'
-  },
-  {
-    icon: ShieldCheck,
-    title: 'AI Governance, Risk & Compliance',
-    desc: 'Ensure responsible AI implementation aligned with global and Nigerian regulatory standards.',
-    features: [
-      'GDPR & data privacy compliance',
-      'NIST 800 & ISO 27001 frameworks',
-      'CBN & NITDA compliance',
-      'Risk assessment & mitigation'
-    ],
-    result: '100% regulatory compliance',
-    cta: 'Ensure AI Compliance',
-    link: '/consultation'
   },
 ];
 
