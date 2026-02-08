@@ -10,12 +10,8 @@ const Header = () => {
     <Nav>
       <div className="container py-4">
         <div className="flex items-center justify-between">
-          <Link to="/" className="flex items-center">
-            <img 
-              src="/lovable-uploads/vibe-intelligence-logo.png" 
-              alt="Vibe Intelligence Logo"
-              className="h-40 w-auto"
-            />
+          <Link to="/" className="flex items-center text-xl font-bold">
+            Vibe Intelligence
           </Link>
           
           {/* Desktop Navigation */}
