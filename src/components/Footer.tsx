@@ -12,7 +12,7 @@ const Footer = () => {
             <img 
               src="/lovable-uploads/vibe-intelligence-logo.png" 
               alt="Vibe Intelligence Logo"
-              className="h-20 mb-4"
+              className="h-32 mb-4"
             />
             <h3 className="text-lg font-bold mb-2">VIBE INTELLIGENCE</h3>
             <p className="text-sm text-muted-foreground mb-4">

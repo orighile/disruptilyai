@@ -14,7 +14,7 @@ const Header = () => {
             <img 
               src="/lovable-uploads/vibe-intelligence-logo.png" 
               alt="Vibe Intelligence Logo"
-              className="h-32 w-auto"
+              className="h-40 w-auto"
             />
           </Link>
           
