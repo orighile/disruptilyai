@@ -14,7 +14,6 @@ const Footer = () => {
               alt="Vibe Intelligence Logo"
               className="h-32 mb-4"
             />
-            <h3 className="text-lg font-bold mb-2">VIBE INTELLIGENCE</h3>
             <p className="text-sm text-muted-foreground mb-4">
               Nigeria's leading AI Business Consulting & Automation agency delivering secure, scalable, and innovative technology solutions.
             </p>
