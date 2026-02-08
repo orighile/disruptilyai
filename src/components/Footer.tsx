@@ -9,11 +9,7 @@ const Footer = () => {
         <div className="grid gap-8 md:grid-cols-4 mb-8">
           {/* Company Info */}
           <div>
-            <img 
-              src="/lovable-uploads/vibe-intelligence-logo.png" 
-              alt="Vibe Intelligence Logo"
-              className="h-32 mb-4"
-            />
+            <h3 className="text-lg font-bold mb-4">Vibe Intelligence</h3>
             <p className="text-sm text-muted-foreground mb-4">
               Nigeria's leading AI Business Consulting & Automation agency delivering secure, scalable, and innovative technology solutions.
             </p>
