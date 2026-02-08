@@ -12,7 +12,7 @@ const Footer = () => {
             <img 
               src="/lovable-uploads/vibe-logo.png" 
               alt="Vibe Intelligence Logo"
-              className="h-16 w-auto mb-4"
+              className="h-24 w-auto mb-4"
             />
             <p className="text-sm text-muted-foreground mb-4">
               Nigeria's leading AI Business Consulting & Automation agency delivering secure, scalable, and innovative technology solutions.
