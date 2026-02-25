@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Linkedin } from 'lucide-react';
+import React from "react";
+import { Link } from "react-router-dom";
+import { Linkedin } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -9,24 +9,21 @@ const Footer = () => {
         <div className="grid gap-8 md:grid-cols-4 mb-8">
           {/* Company Info */}
           <div>
-            <img 
-              src="/lovable-uploads/vibe-logo.png" 
-              alt="Vibe Intelligence Logo"
-              className="h-24 w-auto mb-4"
-            />
+            <img src="/lovable-uploads/vibe-logo.png" alt="Vibe Intelligence Logo" className="h-24 w-auto mb-4" />
             <p className="text-sm text-muted-foreground mb-4">
-              Nigeria's leading AI Business Consulting & Automation agency delivering secure, scalable, and innovative technology solutions.
+              Nigeria's leading AI Business Consulting & Automation agency delivering secure, scalable, and innovative
+              technology solutions.
             </p>
-            <a 
-              href="https://linkedin.com" 
-              target="_blank" 
+            <a
+              href="https://www.linkedin.com/company/vibe-intelligence"
+              target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center w-10 h-10 rounded bg-white/10 hover:bg-white/20 transition"
             >
               <Linkedin className="w-5 h-5" />
             </a>
           </div>
-          
+
           {/* Services */}
           <nav className="flex flex-col gap-3 text-sm">
             <p className="font-semibold text-foreground mb-1">Services</p>
@@ -64,12 +61,16 @@ const Footer = () => {
             <div className="space-y-3 text-muted-foreground">
               <p className="flex items-start gap-2">
                 <span className="text-accent-400 mt-0.5">📍</span>
-                <span>40a Folakemi Avenue, Eleko,<br />Ibeju-Lekki, Lagos, Nigeria</span>
+                <span>
+                  40a Folakemi Avenue, Eleko,
+                  <br />
+                  Ibeju-Lekki, Lagos, Nigeria
+                </span>
               </p>
               <p className="flex items-center gap-2">
                 <span className="text-accent-400">✉️</span>
                 <a href="mailto:sales@disruptily.com" className="hover:text-foreground transition">
-                  sales@disruptily.com
+                  sales@vibeintell.com
                 </a>
               </p>
             </div>
