@@ -23,9 +23,9 @@ const Hero = () => {
             </p>
             <p className="text-lg text-muted-foreground max-w-2xl">
               At Vibe Intelligence, we empower organizations across Nigeria to harness the transformative power of
-              artificial intelligence. Protect against rising synthetic threats with our Deepfake Detection as a
-              Service—real-time multimodal analysis for video, voice, and image authenticity, fraud prevention, and
-              brand safeguarding. Whether automating repetitive tasks, gaining deeper insights, or creating intelligent
+              artificial intelligence. Protect against rising synthetic threats with our Deepfake Detection as a Service
+              real-time multimodal analysis for video, voice, and image authenticity, fraud prevention, and brand
+              safeguarding. Whether automating repetitive tasks, gaining deeper insights, or creating intelligent
               experiences, our expert team delivers tailored, market-ready AI that drives real impact.
             </p>
           </div>
