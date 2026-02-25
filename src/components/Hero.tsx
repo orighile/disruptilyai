@@ -1,8 +1,8 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Button, GhostButton } from './ui';
-import { ArrowRight, Play } from 'lucide-react';
-import heroImage from '@/assets/hero-ai-tech.jpg';
+import React from "react";
+import { Link } from "react-router-dom";
+import { Button, GhostButton } from "./ui";
+import { ArrowRight, Play } from "lucide-react";
+import heroImage from "@/assets/hero-ai-tech.jpg";
 
 const Hero = () => {
   return (
@@ -15,22 +15,21 @@ const Hero = () => {
               Nigeria's Leading AI Consultancy
             </div>
             <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
-              Transform Your Business with{' '}
-              <span className="text-gradient">AI Excellence</span>
+              Transform Your Business with <span className="text-gradient">AI Excellence</span>
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl">
-              Unlock exponential growth with AI solutions designed for Nigerian businesses. 
-              From automation to intelligence, we build systems that scale with your ambitions.
+              Unlock exponential growth with AI solutions designed for Nigerian businesses. From automation to
+              intelligence, we build systems that scale with your ambitions.
             </p>
             <p className="text-lg text-muted-foreground max-w-2xl">
-              At Vibe Intelligence, we empower organizations across Nigeria to harness the transformative 
-              power of artificial intelligence. Whether you're looking to automate repetitive tasks, 
-              gain deeper insights from your data, or create intelligent customer experiences, our 
-              team of experts delivers tailored AI solutions that drive measurable results. We understand 
-              the unique challenges of the Nigerian market and build technology that works for your reality.
+              At Vibe Intelligence, we empower organizations across Nigeria to harness the transformative power of
+              artificial intelligence. Protect against rising synthetic threats with our Deepfake Detection as a
+              Service—real-time multimodal analysis for video, voice, and image authenticity, fraud prevention, and
+              brand safeguarding. Whether automating repetitive tasks, gaining deeper insights, or creating intelligent
+              experiences, our expert team delivers tailored, market-ready AI that drives real impact.
             </p>
           </div>
-          
+
           <div className="flex flex-col sm:flex-row gap-4">
             <Button as={Link} to="/consultation" size="lg" className="group">
               Book Free Consultation
@@ -56,11 +55,7 @@ const Hero = () => {
 
         <div className="relative">
           <div className="absolute inset-0 bg-gradient-to-r from-brand-600/20 to-accent-600/20 rounded-3xl blur-3xl"></div>
-          <img 
-            src={heroImage} 
-            alt="AI Technology Visualization" 
-            className="relative z-10 rounded-3xl shadow-2xl"
-          />
+          <img src={heroImage} alt="AI Technology Visualization" className="relative z-10 rounded-3xl shadow-2xl" />
         </div>
       </div>
     </section>
