@@ -29,9 +29,6 @@ const Header = () => {
             <Link to="/success-stories" className="text-sm hover:text-accent-400 transition">
               Success Stories
             </Link>
-            <Link to="/resources" className="text-sm hover:text-accent-400 transition">
-              Resources
-            </Link>
             <Button as={Link} to="/consultation" size="sm">
               Book Consultation
             </Button>
@@ -70,13 +67,6 @@ const Header = () => {
                 onClick={() => setIsOpen(false)}
               >
                 Success Stories
-              </Link>
-              <Link 
-                to="/resources" 
-                className="text-sm hover:text-accent-400 transition"
-                onClick={() => setIsOpen(false)}
-              >
-                Resources
               </Link>
               <Button as={Link} to="/consultation" size="sm" onClick={() => setIsOpen(false)}>
                 Book Consultation
