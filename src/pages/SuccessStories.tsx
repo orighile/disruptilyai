@@ -46,7 +46,7 @@ const SuccessStories = () => {
           <div className="grid gap-6 md:grid-cols-2">
             <Card>
               <blockquote className="text-lg mb-4">
-                "Triade transformed our customer service with AI agents that understand our Nigerian customers perfectly."
+                "Vibe Intelligence transformed our customer service with AI agents that understand our Nigerian customers perfectly."
               </blockquote>
               <footer className="text-sm text-muted-foreground">
                 — CEO, Leading Fintech Company
