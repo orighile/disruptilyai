@@ -38,8 +38,8 @@ const Hero = () => {
               <div className="text-sm text-muted-foreground">Businesses Transformed</div>
             </div>
             <div>
-              <div className="text-2xl font-bold text-accent-400">$10M+</div>
-              <div className="text-sm text-muted-foreground">Cost Saved</div>
+              <div className="text-2xl font-bold text-accent-400">10M+</div>
+              <div className="text-sm text-muted-foreground">Threats Blocked</div>
             </div>
             <div>
               <div className="text-2xl font-bold text-accent-400">98%</div>
