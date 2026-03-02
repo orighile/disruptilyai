@@ -6,7 +6,7 @@ import Footer from '../components/Footer';
 const stories = [
   {
     title: 'Fintech — Deepfake Fraud Prevention',
-    result: '99.2% detection rate; $2M fraud prevented',
+    result: '99.2% detection rate across KYC processes',
     details: 'Deployed real-time deepfake detection across KYC processes, preventing synthetic identity fraud at scale.'
   },
   {
