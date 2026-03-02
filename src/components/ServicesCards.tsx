@@ -30,7 +30,7 @@ const cards = [
     ],
     result: '100% regulatory compliance',
     cta: 'Ensure AI Compliance',
-    link: '/consultation'
+    link: '/ai-grc'
   },
   {
     icon: Megaphone,
@@ -44,7 +44,7 @@ const cards = [
     ],
     result: '250% increase in qualified leads',
     cta: 'Automate Your Marketing',
-    link: '/consultation'
+    link: '/ai-marketing'
   },
 ];
 
