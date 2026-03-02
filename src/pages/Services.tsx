@@ -7,33 +7,33 @@ import ServicesCards from '../components/ServicesCards';
 
 const tiers = [
   { 
-    name: 'Startup', 
-    price: '₦350k - ₦1.2m', 
+    name: 'Starter', 
+    price: 'From $5,000/mo', 
     features: [
-      'AI roadmap (4 weeks)',
-      'MVP automations',
-      'Basic analytics',
-      '1 agent use-case'
+      'Deepfake detection API access',
+      'Basic GRC assessment',
+      'Marketing automation setup',
+      'Email support'
     ] 
   },
   { 
-    name: 'SME', 
-    price: '₦1.5m - ₦4.5m', 
+    name: 'Professional', 
+    price: 'From $15,000/mo', 
     features: [
-      'AI roadmap (6 weeks)',
-      'Multi-channel automation',
-      'Dashboards & reporting',
-      '2-3 agent use-cases'
+      'Full deepfake monitoring suite',
+      'Comprehensive GRC program',
+      'Multi-channel marketing automation',
+      'Dedicated account manager'
     ] 
   },
   { 
     name: 'Enterprise', 
     price: 'Custom', 
     features: [
-      'Full transformation program',
-      'Legacy integration',
-      'Change management',
-      'Security & compliance'
+      'Custom deployment options',
+      'Full compliance program',
+      'Advanced marketing AI',
+      'SLA & priority support'
     ] 
   },
 ];
@@ -45,7 +45,7 @@ const Services = () => {
       <div className="container py-12 md:py-16">
         <h1 className="text-3xl md:text-4xl font-bold mb-4">Services</h1>
         <p className="text-muted-foreground max-w-3xl mb-8">
-          Comprehensive AI strategy, build, and scale services tailored to Nigerian business realities.
+          AI security, governance, and marketing automation solutions for enterprises worldwide.
         </p>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-12">
@@ -72,10 +72,10 @@ const Services = () => {
           <h2 className="text-2xl font-bold mb-6">Our Process</h2>
           <div className="grid gap-6 md:grid-cols-4">
             {[
-              ['Discover', 'Stakeholder interviews, data audit, and KPI alignment.'],
-              ['Design', 'AI use-cases, architecture, and success metrics.'],
-              ['Deliver', 'Implementation, testing, and enablement.'],
-              ['Scale', 'Monitoring, optimization, and continuous training.']
+              ['Discover', 'Stakeholder interviews, threat assessment, and goal alignment.'],
+              ['Design', 'Solution architecture, compliance mapping, and success metrics.'],
+              ['Deliver', 'Implementation, testing, and team enablement.'],
+              ['Scale', 'Monitoring, optimization, and continuous improvement.']
             ].map(([title, desc], i) => (
               <Card key={i}>
                 <div className="font-semibold mb-2">{title}</div>
@@ -92,18 +92,18 @@ const Services = () => {
               <thead className="text-left text-muted-foreground">
                 <tr>
                   <th className="py-2 pr-4">Feature</th>
-                  <th className="py-2 pr-4">Startup</th>
-                  <th className="py-2 pr-4">SME</th>
+                  <th className="py-2 pr-4">Starter</th>
+                  <th className="py-2 pr-4">Professional</th>
                   <th className="py-2 pr-4">Enterprise</th>
                 </tr>
               </thead>
               <tbody className="text-foreground">
                 {[
-                  ['AI Roadmap','✓','✓','✓'],
                   ['Deepfake Detection','✓','✓','✓'],
+                  ['AI GRC','•','✓','✓'],
                   ['Marketing Automation','•','✓','✓'],
-                  ['Custom Agents','•','✓','✓'],
-                  ['Governance, Risk & Compliance','—','•','✓'],
+                  ['Custom Deployment','—','•','✓'],
+                  ['SLA & Priority Support','—','—','✓'],
                 ].map((row, i) => (
                   <tr key={i} className="border-t border-white/10">
                     {row.map((cell, j) => (

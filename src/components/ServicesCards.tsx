@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Button } from './ui';
-import { Building2, Rocket, Megaphone, Bot, ShieldCheck } from 'lucide-react';
+import { ShieldCheck, Megaphone } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const cards = [
@@ -21,47 +21,21 @@ const cards = [
   {
     icon: ShieldCheck,
     title: 'AI Governance, Risk & Compliance',
-    desc: 'Ensure responsible AI implementation aligned with global and Nigerian regulatory standards.',
+    desc: 'Ensure responsible AI implementation aligned with global regulatory standards.',
     features: [
       'GDPR & data privacy compliance',
       'NIST 800 & ISO 27001 frameworks',
-      'CBN & NITDA compliance',
-      'Risk assessment & mitigation'
+      'Risk assessment & mitigation',
+      'Policy development & auditing'
     ],
     result: '100% regulatory compliance',
     cta: 'Ensure AI Compliance',
     link: '/consultation'
   },
   {
-    icon: Building2,
-    title: 'Enterprise AI Transformation',
-    desc: 'Modernize your established business with AI solutions that integrate seamlessly with operations and drive growth.',
-    features: [
-      'Legacy system AI integration',
-      'Process optimization & automation',
-      'Decision support systems',
-      'Change management & training'
-    ],
-    result: 'Avg. 40% efficiency increase',
-    cta: 'Transform Your Enterprise'
-  },
-  {
-    icon: Rocket,
-    title: 'Startup AI Acceleration',
-    desc: 'Give your startup the AI advantage from day one with scalable systems that grow with you.',
-    features: [
-      'Rapid AI prototypes',
-      'Scalable architecture',
-      'Cost-effective implementation',
-      'Market validation via AI insights'
-    ],
-    result: '3x faster market entry',
-    cta: 'Accelerate Your Startup'
-  },
-  {
     icon: Megaphone,
     title: 'AI Marketing Automation',
-    desc: 'Deploy AI-powered campaigns that understand Nigerian customer behavior and scale personalization.',
+    desc: 'Deploy AI-powered campaigns that understand customer behavior and scale personalization.',
     features: [
       'Multi-channel orchestration',
       'Behavior analysis',
@@ -69,28 +43,16 @@ const cards = [
       'Performance optimization'
     ],
     result: '250% increase in qualified leads',
-    cta: 'Automate Your Marketing'
-  },
-  {
-    icon: Bot,
-    title: 'Custom AI Agents',
-    desc: 'Build intelligent agents for support, sales, and ops with Nigerian cultural awareness.',
-    features: [
-      'Conversational AI',
-      'English & Pidgin',
-      'Systems integration',
-      'Continuous learning'
-    ],
-    result: '24/7 ops, 95% CSAT',
-    cta: 'Deploy AI Agents'
+    cta: 'Automate Your Marketing',
+    link: '/consultation'
   },
 ];
 
 const ServicesCards = () => {
   return (
     <section className="container py-10 md:py-16">
-      <h2 className="text-2xl md:text-3xl font-bold">Services</h2>
-      <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <h2 className="text-2xl md:text-3xl font-bold">Our Services</h2>
+      <div className="mt-6 grid gap-6 md:grid-cols-3">
         {cards.map((card, i) => (
           <Card key={i} className="flex flex-col h-full">
             <div className="flex items-center gap-3 mb-4">
@@ -105,21 +67,12 @@ const ServicesCards = () => {
             </ul>
             <div className="text-xs text-muted-foreground mb-4">{card.result}</div>
             <div className="mt-auto">
-              <Button as={Link} to={(card as any).link || "/consultation"} size="sm">
+              <Button as={Link} to={card.link} size="sm">
                 {card.cta}
               </Button>
             </div>
           </Card>
         ))}
-      </div>
-
-      <div className="mt-10 grid gap-4 md:grid-cols-2">
-        <Card>
-          <div className="font-semibold mb-2">AI Outsourcing</div>
-          <p className="text-sm text-muted-foreground">
-            End-to-end AI operations management so your team can focus on growth.
-          </p>
-        </Card>
       </div>
     </section>
   );

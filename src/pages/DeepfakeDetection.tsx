@@ -24,7 +24,7 @@ const DeepfakeDetection = () => {
           <p className="text-xl text-muted-foreground mb-8">
             Protect your organization from AI-generated synthetic media threats with enterprise-grade 
             detection technology. Vibe Intelligence delivers unmatched accuracy in identifying 
-            manipulated content, tailored for the Nigerian market.
+            manipulated content across all media formats.
           </p>
           <Button as={Link} to="/consultation" size="lg">
             Request a Demo
@@ -63,7 +63,7 @@ const DeepfakeDetection = () => {
             <p className="text-muted-foreground mb-4">
               Our proprietary multi-modal detection system analyzes visual, audio, and behavioral 
               patterns simultaneously to identify synthetic content with industry-leading accuracy.
-              Built specifically to address threats facing Nigerian enterprises.
+              Built to address threats facing enterprises worldwide.
             </p>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li className="flex items-center gap-2">
@@ -76,7 +76,7 @@ const DeepfakeDetection = () => {
               </li>
               <li className="flex items-center gap-2">
                 <Globe className="w-4 h-4 text-accent-400" />
-                Nigeria-focused threat intelligence
+                Global threat intelligence
               </li>
             </ul>
           </Card>
@@ -91,7 +91,7 @@ const DeepfakeDetection = () => {
             <p className="text-muted-foreground mb-4">
               Vibe Intelligence specializes in the detection of AI-generated faces and manipulated 
               imagery. Our technology protects organizations from identity fraud, disinformation 
-              campaigns, and synthetic media attacks targeting the Nigerian market.
+              campaigns, and synthetic media attacks globally.
             </p>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li className="flex items-center gap-2">

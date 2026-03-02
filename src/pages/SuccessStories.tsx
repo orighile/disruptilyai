@@ -5,19 +5,19 @@ import Footer from '../components/Footer';
 
 const stories = [
   {
-    title: 'Fintech SME — WhatsApp Sales Agent',
-    result: '45% conversion increase; 60% faster response',
-    details: 'Deployed multilingual agent integrated with payment and CRM; auto-nurture sequences reduced churn.'
+    title: 'Fintech — Deepfake Fraud Prevention',
+    result: '99.2% detection rate; $2M fraud prevented',
+    details: 'Deployed real-time deepfake detection across KYC processes, preventing synthetic identity fraud at scale.'
   },
   {
-    title: 'Retail Chain — Demand Forecasting',
-    result: '12% inventory cost reduction; 18% stockout decrease',
-    details: 'Time-series forecasting + promo calendar features, surfaced to buyers in a weekly planning dashboard.'
+    title: 'Retail Chain — AI Marketing Automation',
+    result: '250% increase in qualified leads',
+    details: 'Multi-channel AI marketing automation with behavioral targeting and personalized content generation.'
   },
   {
-    title: 'Bank — Complaints Triage',
-    result: '22% faster resolution; CSAT +9pts',
-    details: 'NLP triage + agent assistance for call center; PII redaction and secure audit trail for compliance.'
+    title: 'Financial Services — GRC Compliance',
+    result: '100% audit compliance; 60% faster reviews',
+    details: 'Comprehensive AI governance framework aligned with GDPR, NIST 800, and ISO 27001 standards.'
   }
 ];
 
@@ -28,7 +28,7 @@ const SuccessStories = () => {
       <div className="container py-12 md:py-16">
         <h1 className="text-3xl md:text-4xl font-bold mb-4">Success Stories</h1>
         <p className="text-muted-foreground max-w-3xl mb-8">
-          Selected outcomes from programs across startups, SMEs, and enterprises.
+          Selected outcomes from enterprise engagements across industries.
         </p>
 
         <div className="grid gap-6 md:grid-cols-3">
@@ -46,18 +46,18 @@ const SuccessStories = () => {
           <div className="grid gap-6 md:grid-cols-2">
             <Card>
               <blockquote className="text-lg mb-4">
-                "Vibe Intelligence transformed our customer service with AI agents that understand our Nigerian customers perfectly."
+                "Vibe Intelligence's deepfake detection saved us from a multi-million dollar fraud attempt. Their technology is world-class."
               </blockquote>
               <footer className="text-sm text-muted-foreground">
-                — CEO, Leading Fintech Company
+                — CISO, Global Financial Institution
               </footer>
             </Card>
             <Card>
               <blockquote className="text-lg mb-4">
-                "The AI forecasting system saved us millions in inventory costs within the first quarter."
+                "Their AI marketing platform tripled our qualified leads within the first quarter. Incredible ROI."
               </blockquote>
               <footer className="text-sm text-muted-foreground">
-                — Operations Director, Retail Chain
+                — CMO, Enterprise Retail Company
               </footer>
             </Card>
           </div>
