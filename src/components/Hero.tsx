@@ -12,21 +12,16 @@ const Hero = () => {
           <div className="space-y-4">
             <div className="inline-flex items-center gap-2 glass rounded-full px-4 py-2 text-sm">
               <div className="w-2 h-2 bg-accent-500 rounded-full animate-pulse"></div>
-              Nigeria's Leading AI Consultancy
+              AI Security & Compliance Experts
             </div>
             <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
-              Transform Your Business with <span className="text-gradient">AI Excellence</span>
+              Protect &amp; Grow Your Business with <span className="text-gradient">AI Excellence</span>
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl">
-              Unlock exponential growth with AI solutions designed for Nigerian businesses. From automation to
-              intelligence, we build systems that scale with your ambitions.
+              Enterprise-grade deepfake detection, AI governance, and marketing automation — built for organizations that demand security, compliance, and results.
             </p>
             <p className="text-lg text-muted-foreground max-w-2xl">
-              At Vibe Intelligence, we empower organizations across Nigeria to harness the transformative power of
-              artificial intelligence. Protect against rising synthetic threats with our Deepfake Detection as a Service
-              real-time multimodal analysis for video, voice, and image authenticity, fraud prevention, and brand
-              safeguarding. Whether automating repetitive tasks, gaining deeper insights, or creating intelligent
-              experiences, our expert team delivers tailored, market-ready AI that drives real impact.
+              Vibe Intelligence empowers enterprises worldwide to harness AI responsibly. From real-time deepfake detection and synthetic media analysis to regulatory compliance and AI-powered marketing, our expert team delivers tailored solutions that drive measurable impact.
             </p>
           </div>
 
@@ -43,7 +38,7 @@ const Hero = () => {
               <div className="text-sm text-muted-foreground">Businesses Transformed</div>
             </div>
             <div>
-              <div className="text-2xl font-bold text-accent-400">₦1B+ globally</div>
+              <div className="text-2xl font-bold text-accent-400">$10M+</div>
               <div className="text-sm text-muted-foreground">Cost Saved</div>
             </div>
             <div>

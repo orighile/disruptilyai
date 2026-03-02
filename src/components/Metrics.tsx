@@ -54,7 +54,7 @@ const Metrics = () => {
     <section className="container py-12 md:py-16">
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6 glass-card">
         <div className="text-center">
-          <AnimatedNumber value={1000000000} prefix="₦" suffix="+" />
+          <AnimatedNumber value={10} prefix="$" suffix="M+" />
           <p className="text-sm text-muted-foreground mt-2">Cost Saved</p>
         </div>
         <div className="text-center">

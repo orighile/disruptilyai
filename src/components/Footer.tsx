@@ -11,8 +11,7 @@ const Footer = () => {
           <div>
             <img src="/lovable-uploads/vibe-logo.png" alt="Vibe Intelligence Logo" className="h-24 w-auto mb-4" />
             <p className="text-sm text-muted-foreground mb-4">
-              Nigeria's leading AI Business Consulting & Automation agency delivering secure, scalable, and innovative
-              technology solutions.
+              AI security, governance, and marketing automation for enterprises worldwide.
             </p>
             <a
               href="https://www.linkedin.com/company/vibe-intelligence"
@@ -27,17 +26,14 @@ const Footer = () => {
           {/* Services */}
           <nav className="flex flex-col gap-3 text-sm">
             <p className="font-semibold text-foreground mb-1">Services</p>
-            <Link to="/services" className="text-muted-foreground hover:text-foreground transition">
-              AI Consulting
-            </Link>
-            <Link to="/services" className="text-muted-foreground hover:text-foreground transition">
-              Business Automation
-            </Link>
             <Link to="/deepfake-detection" className="text-muted-foreground hover:text-foreground transition">
               Deepfake Detection
             </Link>
-            <Link to="/consultation" className="text-muted-foreground hover:text-foreground transition">
-              GRC Compliance
+            <Link to="/services" className="text-muted-foreground hover:text-foreground transition">
+              AI GRC
+            </Link>
+            <Link to="/services" className="text-muted-foreground hover:text-foreground transition">
+              AI Marketing Automation
             </Link>
           </nav>
 
@@ -58,11 +54,11 @@ const Footer = () => {
             <div className="space-y-3 text-muted-foreground">
               <p className="flex items-start gap-2">
                 <span className="text-accent-400 mt-0.5">📍</span>
-                <span>
-                  40a Folakemi Avenue, Eleko,
-                  <br />
-                  Ibeju-Lekki, Lagos, Nigeria
-                </span>
+                <span>Austin, TX, USA</span>
+              </p>
+              <p className="flex items-start gap-2">
+                <span className="text-accent-400 mt-0.5">📍</span>
+                <span>Lagos, Nigeria</span>
               </p>
               <p className="flex items-center gap-2">
                 <span className="text-accent-400">✉️</span>
