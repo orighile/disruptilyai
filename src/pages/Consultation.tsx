@@ -102,29 +102,27 @@ Contact Person: ____________________
 Email: ____________________
 Phone: ____________________
 
-1. Top 3 business outcomes you want from AI:
+1. Which service are you most interested in?
+   [ ] Deepfake Detection
+   [ ] AI Governance, Risk & Compliance (GRC)
+   [ ] AI Marketing Automation
+
+2. Top 3 business outcomes you want from AI:
    a) ____________________
    b) ____________________
    c) ____________________
 
-2. Data sources available (check all that apply):
+3. Data sources available (check all that apply):
    [ ] CRM System
    [ ] ERP System
    [ ] Website Analytics
    [ ] Spreadsheets/Excel
    [ ] Other: ____________________
 
-3. Channels to automate (check all that apply):
-   [ ] WhatsApp
-   [ ] Email
-   [ ] Website/Web Chat
-   [ ] POS System
-   [ ] Other: ____________________
-
-4. Compliance constraints:
-   [ ] NITDA
-   [ ] CBN
+4. Compliance requirements (check all that apply):
+   [ ] SOC 2
    [ ] GDPR
+   [ ] ISO 27001
    [ ] Other: ____________________
 
 5. Timeline: ____________________
@@ -151,9 +149,9 @@ ____________________
     <div className="min-h-screen">
       <Header />
       <div className="container py-12 md:py-16">
-        <h1 className="text-3xl md:text-4xl font-bold mb-4">Consultation</h1>
+        <h1 className="text-3xl md:text-4xl font-bold mb-4">Book a Consultation</h1>
         <p className="text-muted-foreground max-w-3xl mb-8">
-          Book a session — virtual or in-person (Lagos, Abuja, Benin, Port Harcourt).
+          Schedule a virtual session or meet us in person at our Austin, TX or Lagos offices. Let's explore how AI can transform your business.
         </p>
 
         <div className="grid gap-6 md:grid-cols-2">
@@ -201,10 +199,10 @@ ____________________
                     onChange={handleChange} 
                     className="bg-input rounded-xl px-3 py-2 border border-border"
                   >
-                    <option value="free">Free 30-minute AI Strategy Session</option>
-                    <option value="audit">Comprehensive AI Audit (Paid)</option>
-                    <option value="quote">Custom AI Development Quote</option>
-                    <option value="training">Training Program Consultation</option>
+                    <option value="free">Free 30-min AI Strategy Session</option>
+                    <option value="audit">Deepfake Detection Assessment</option>
+                    <option value="quote">AI GRC Program Consultation</option>
+                    <option value="training">Marketing Automation Consultation</option>
                   </select>
                 </label>
                 <label className="grid gap-1 text-sm">
@@ -216,11 +214,9 @@ ____________________
                     className="bg-input rounded-xl px-3 py-2 border border-border"
                   >
                     <option value="">Select...</option>
-                    <option value="Lagos">Lagos</option>
-                    <option value="Abuja">Abuja</option>
-                    <option value="Benin">Benin</option>
-                    <option value="Port Harcourt">Port Harcourt</option>
                     <option value="Virtual">Virtual</option>
+                    <option value="Austin">Austin, TX</option>
+                    <option value="Lagos">Lagos</option>
                   </select>
                 </label>
               </div>
@@ -253,10 +249,10 @@ ____________________
           <Card>
             <div className="font-semibold mb-4">Pre-Consultation Questionnaire</div>
             <ul className="text-sm text-muted-foreground list-disc list-inside space-y-2 mb-4">
+              <li>Which service interests you most — Deepfake Detection, AI GRC, or Marketing Automation?</li>
               <li>Top 3 business outcomes you want from AI?</li>
               <li>Data sources available (CRM, ERP, website, spreadsheets)?</li>
-              <li>Channels to automate (WhatsApp, email, web, POS)?</li>
-              <li>Compliance constraints (NITDA/CBN)?</li>
+              <li>Compliance requirements (SOC 2, GDPR, ISO 27001)?</li>
               <li>Timeline and budget window?</li>
             </ul>
             <button 
