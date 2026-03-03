@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Button } from './ui';
-import { ShieldCheck, Megaphone } from 'lucide-react';
+import { ShieldCheck, Megaphone, Bot } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const cards = [
@@ -45,6 +45,20 @@ const cards = [
     result: '250% increase in qualified leads',
     cta: 'Automate Your Marketing',
     link: '/ai-marketing'
+  },
+  {
+    icon: Bot,
+    title: 'Custom AI Automation',
+    desc: 'Bespoke AI solutions designed to automate your unique business processes and workflows.',
+    features: [
+      'Custom AI agent development',
+      'Workflow automation',
+      'System integration & APIs',
+      'Ongoing optimization & support'
+    ],
+    result: '60% reduction in manual tasks',
+    cta: 'Build Your AI Solution',
+    link: '/custom-ai-automation'
   },
 ];
 
