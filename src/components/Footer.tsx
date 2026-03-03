@@ -9,7 +9,10 @@ const Footer = () => {
         <div className="grid gap-8 md:grid-cols-4 mb-8">
           {/* Company Info */}
           <div>
-            <img src="/lovable-uploads/vibe-logo.png" alt="Vibe Intelligence Logo" className="h-24 w-auto mb-4" />
+            <div className="mb-4">
+              <img src="/lovable-uploads/vibe-logo.png" alt="Vibe Intelligence Logo" className="h-24 w-auto" />
+              <span className="block text-[10px] tracking-[0.3em] uppercase text-muted-foreground mt--1 ml-1">Agentic AI</span>
+            </div>
             <p className="text-sm text-muted-foreground mb-4">
               AI security, governance, and marketing automation for enterprises worldwide.
             </p>

@@ -11,11 +11,14 @@ const Header = () => {
       <div className="container py-4">
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center">
-            <img 
-              src="/lovable-uploads/vibe-logo.png" 
-              alt="Vibe Intelligence Logo"
-              className="h-28 w-auto"
-            />
+            <div className="flex flex-col items-center">
+              <img 
+                src="/lovable-uploads/vibe-logo.png" 
+                alt="Vibe Intelligence Logo"
+                className="h-28 w-auto"
+              />
+              <span className="text-[10px] tracking-[0.3em] uppercase text-muted-foreground -mt-2">Agentic AI</span>
+            </div>
           </Link>
           
           {/* Desktop Navigation */}
