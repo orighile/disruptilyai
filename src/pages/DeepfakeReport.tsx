@@ -265,8 +265,8 @@ const DeepfakeReport = () => {
                     </>
                   ) : (
                     <div className="text-center py-6 space-y-5">
-                      <div className="w-16 h-16 rounded-full bg-green-500/10 flex items-center justify-center mx-auto">
-                        <CheckCircle2 className="w-8 h-8 text-green-500" />
+                      <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto">
+                        <CheckCircle2 className="w-8 h-8 text-accent" />
                       </div>
                       <div>
                         <h3 className="text-2xl font-bold mb-2">Thank You!</h3>
