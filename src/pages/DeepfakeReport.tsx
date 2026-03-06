@@ -3,84 +3,63 @@ import { Link } from 'react-router-dom';
 import { z } from 'zod';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
+import { Card, CardContent } from '../components/ui/card';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
 import { useToast } from '../hooks/use-toast';
-import { generateDeepfakeReportPDF } from '../utils/deepfakeReportPdf';
 import { supabase } from '@/integrations/supabase/client';
-import { 
-  Shield, 
-  AlertTriangle, 
-  TrendingUp, 
-  Building2, 
-  Vote, 
-  Landmark, 
+import {
+  Shield,
+  AlertTriangle,
+  TrendingUp,
+  Landmark,
+  Download,
+  CheckCircle2,
+  Globe,
+  Users,
   Lock,
   FileText,
-  Users,
-  Globe
+  ArrowRight
 } from 'lucide-react';
 
-// Validation schema
 const subscriptionSchema = z.object({
-  email: z.string()
-    .trim()
-    .min(1, 'Email is required')
-    .email('Please enter a valid email address')
-    .max(255, 'Email must be less than 255 characters'),
-  organization: z.string()
-    .trim()
-    .min(1, 'Organization is required')
-    .max(200, 'Organization name must be less than 200 characters'),
-  role: z.string()
-    .trim()
-    .max(100, 'Role must be less than 100 characters')
-    .optional()
+  name: z.string().trim().min(1, 'Name is required').max(100, 'Name must be less than 100 characters'),
+  email: z.string().trim().min(1, 'Email is required').email('Please enter a valid email address').max(255, 'Email must be less than 255 characters'),
 });
 
 type SubscriptionForm = z.infer<typeof subscriptionSchema>;
 
 const DeepfakeReport = () => {
   const { toast } = useToast();
-  const [formData, setFormData] = useState<SubscriptionForm>({
-    email: '',
-    organization: '',
-    role: ''
-  });
+  const [formData, setFormData] = useState<SubscriptionForm>({ name: '', email: '' });
   const [errors, setErrors] = useState<Partial<Record<keyof SubscriptionForm, string>>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isUnlocked, setIsUnlocked] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrors({});
-    
-    // Validate form data
+
     const result = subscriptionSchema.safeParse(formData);
-    
     if (!result.success) {
       const fieldErrors: Partial<Record<keyof SubscriptionForm, string>> = {};
       result.error.errors.forEach((error) => {
         const field = error.path[0] as keyof SubscriptionForm;
-        if (!fieldErrors[field]) {
-          fieldErrors[field] = error.message;
-        }
+        if (!fieldErrors[field]) fieldErrors[field] = error.message;
       });
       setErrors(fieldErrors);
       return;
     }
-    
+
     setIsSubmitting(true);
-    
+
     try {
-      // Save subscription to database
       const { error: dbError } = await supabase
         .from('report_subscriptions')
         .insert({
           email: result.data.email,
-          organization: result.data.organization,
-          role: result.data.role || null,
+          organization: result.data.name,
           report_type: 'deepfake-2026'
         });
 
@@ -89,31 +68,20 @@ const DeepfakeReport = () => {
         throw new Error('Failed to save subscription');
       }
 
-      // Send notification email (fire and forget - don't block PDF generation)
+      // Fire-and-forget notification
       supabase.functions.invoke('send-subscription-notification', {
         body: {
           email: result.data.email,
-          organization: result.data.organization,
-          role: result.data.role,
-          reportType: 'Global State of Deepfake Threats 2026'
+          organization: result.data.name,
+          reportType: 'Global State of Deepfakes 2026'
         }
-      }).then(({ error }) => {
-        if (error) {
-          console.error('Notification error:', error);
-        } else {
-          console.log('Notification sent successfully');
-        }
-      });
+      }).catch(console.error);
 
-      // Generate and open PDF in new tab
-      generateDeepfakeReportPDF();
-      
+      setIsUnlocked(true);
       toast({
-        title: "Report Generated!",
-        description: "The Deepfake Threats Report has been opened in a new tab.",
+        title: "Access Granted!",
+        description: "Your report is ready for download.",
       });
-      
-      setFormData({ email: '', organization: '', role: '' });
     } catch (error) {
       console.error('Submission error:', error);
       toast({
@@ -126,205 +94,217 @@ const DeepfakeReport = () => {
     }
   };
 
+  const handleDownload = () => {
+    window.open('/reports/deepfake-report-2026.pdf', '_blank');
+  };
+
   const stats = [
-    { value: "4,500%", label: "Increase in deepfake attacks since 2022", icon: TrendingUp },
-    { value: "#3", label: "Nigeria's rank in Africa for deepfake fraud", icon: AlertTriangle },
-    { value: "67%", label: "Nigerian banks with synthetic identity attempts", icon: Landmark },
-    { value: "2027", label: "Elections identified as high-risk for AI disinformation", icon: Vote },
+    { value: "8M+", label: "Deepfake files detected globally — a 16× increase from 2023", icon: TrendingUp },
+    { value: "$10.5T", label: "Projected annual cybercrime cost driven by synthetic identity fraud", icon: AlertTriangle },
+    { value: "21%", label: "Of companies have mature governance models for AI agents", icon: Landmark },
+  ];
+
+  const insights = [
+    "How Africa's mobile-first economy is uniquely vulnerable to voice-cloning and real-time video deepfakes.",
+    "Why Nigeria's 2027 elections face critical AI disinformation risk — and what can be done now.",
+    "Strategic recommendations for enterprises, banks, and government agencies to build deepfake resilience.",
   ];
 
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      
-      {/* Hero Section */}
-      <section className="relative py-16 md:py-24 bg-gradient-to-br from-primary/10 via-background to-accent/10">
-        <div className="container">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-destructive/10 text-destructive mb-6">
-              <Shield className="w-4 h-4" />
-              <span className="text-sm font-medium">2026 Threat Intelligence Report</span>
+
+      {/* Hero */}
+      <section className="relative overflow-hidden">
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-background to-accent/10 pointer-events-none" />
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-primary/5 blur-[120px] pointer-events-none" />
+
+        <div className="container relative py-20 md:py-28">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left — Copy */}
+            <div className="space-y-6">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-primary text-sm font-medium">
+                <Shield className="w-4 h-4" />
+                2026 Strategic Intelligence Report
+              </div>
+
+              <h1 className="text-4xl md:text-5xl lg:text-[3.4rem] font-bold leading-[1.1] tracking-tight">
+                The Global State of Deepfakes in 2026
+              </h1>
+              <p className="text-xl text-muted-foreground leading-relaxed max-w-lg">
+                Navigating the Synthetic Frontier in Africa and Nigeria — a definitive analysis by <span className="text-foreground font-medium">Vibe Intelligence</span>.
+              </p>
+
+              <div className="flex flex-wrap gap-6 text-sm text-muted-foreground pt-2">
+                <span className="flex items-center gap-2"><FileText className="w-4 h-4 text-primary" /> 14 Pages</span>
+                <span className="flex items-center gap-2"><Globe className="w-4 h-4 text-primary" /> Global + Africa Focus</span>
+                <span className="flex items-center gap-2"><Users className="w-4 h-4 text-primary" /> Free Download</span>
+              </div>
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              Global State of<br />
-              <span className="text-primary">Deepfake Threats 2026</span>
-            </h1>
-            <p className="text-xl text-muted-foreground mb-4 max-w-2xl mx-auto">
-              By Vibe Intelligence
-            </p>
-            <p className="text-lg text-primary font-medium mb-8 max-w-2xl mx-auto">
-              How Vibe Intelligence Protects Nigerian Enterprises from Synthetic Media Threats
-            </p>
-            <div className="flex flex-wrap justify-center gap-4 text-sm text-muted-foreground">
-              <span className="flex items-center gap-2">
-                <FileText className="w-4 h-4" />
-                15,000+ words
-              </span>
-              <span className="flex items-center gap-2">
-                <Globe className="w-4 h-4" />
-                Global coverage
-              </span>
-              <span className="flex items-center gap-2">
-                <Users className="w-4 h-4" />
-                Nigeria focus
-              </span>
+
+            {/* Right — Report Cover */}
+            <div className="flex justify-center lg:justify-end">
+              <div className="relative group">
+                <div className="absolute -inset-1 rounded-2xl bg-gradient-to-br from-primary/40 to-accent/40 blur-lg opacity-60 group-hover:opacity-80 transition-opacity" />
+                <img
+                  src="/reports/deepfake-report-cover.jpg"
+                  alt="The Global State of Deepfakes in 2026 — Report Cover"
+                  className="relative rounded-xl shadow-2xl w-full max-w-[380px] border border-border/50"
+                />
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Key Statistics */}
-      <section className="py-12 bg-card border-y border-border">
-        <div className="container">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <stat.icon className="w-8 h-8 mx-auto mb-3 text-primary" />
-                <div className="text-3xl md:text-4xl font-bold text-foreground mb-1">{stat.value}</div>
-                <div className="text-sm text-muted-foreground">{stat.label}</div>
+      {/* Statistics Bar */}
+      <section className="border-y border-border bg-secondary/50">
+        <div className="container py-10">
+          <div className="grid md:grid-cols-3 gap-8">
+            {stats.map((stat, i) => (
+              <div key={i} className="text-center md:text-left flex flex-col md:flex-row items-center md:items-start gap-4">
+                <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                  <stat.icon className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <div className="text-3xl font-bold text-foreground">{stat.value}</div>
+                  <div className="text-sm text-muted-foreground mt-1">{stat.label}</div>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Report Excerpt - Shortened */}
-      <section className="py-16 md:py-24">
+      {/* Insights + Form */}
+      <section className="py-20 md:py-28">
         <div className="container">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold mb-8 text-center">Report Overview</h2>
-            
-            {/* Brief Executive Summary */}
-            <Card className="mb-8">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <FileText className="w-5 h-5 text-primary" />
-                  Executive Summary
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="prose prose-sm max-w-none text-muted-foreground">
-                <p>
-                  The global deepfake threat landscape has evolved from a niche technological curiosity into a 
-                  sophisticated weapon of mass deception. As we enter 2026, artificial intelligence-generated 
-                  synthetic media poses unprecedented risks to governments, financial institutions, democratic 
-                  processes, and individual citizens worldwide.
+          <div className="grid lg:grid-cols-2 gap-16 items-start">
+            {/* Left — Key Insights */}
+            <div className="space-y-8">
+              <div>
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">What You'll Learn</h2>
+                <p className="text-muted-foreground text-lg leading-relaxed">
+                  This report arms decision-makers with the intelligence needed to defend against
+                  the fastest-growing cyber threat on the continent.
                 </p>
-                <p>
-                  This comprehensive report by Vibe Intelligence presents the most detailed analysis of deepfake 
-                  threats ever assembled for the African market, with particular emphasis on Nigeria—covering 
-                  Government, Defense & Intelligence, Electoral Integrity, and Financial Services/Banking KYC. 
-                  Our findings reveal a <strong>4,500% increase in deepfake attacks globally since 2022</strong>, 
-                  with Nigeria facing unique challenges that demand immediate attention from all sectors.
-                </p>
-              </CardContent>
-            </Card>
+              </div>
 
-            {/* What's Included */}
-            <div className="text-center py-8 border-t border-border">
-              <p className="text-muted-foreground mb-4">
-                The full 15,000-word report includes:
-              </p>
-              <ul className="text-sm text-muted-foreground mb-8 space-y-2">
-                <li>• Detailed global threat landscape with regional analysis</li>
-                <li>• 12 in-depth case studies from Nigeria and West Africa</li>
-                <li>• Nigeria Focus: Government, Defense, Elections, Banking KYC</li>
-                <li>• Technical detection methodology comparison</li>
-                <li>• Implementation roadmaps for different organization sizes</li>
-                <li>• 2027 threat predictions and preparation guidelines</li>
-              </ul>
+              <div className="space-y-5">
+                {insights.map((insight, i) => (
+                  <div key={i} className="flex gap-4 items-start">
+                    <div className="flex-shrink-0 mt-1">
+                      <CheckCircle2 className="w-5 h-5 text-primary" />
+                    </div>
+                    <p className="text-muted-foreground leading-relaxed">{insight}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="glass-card flex items-center gap-4">
+                <Lock className="w-5 h-5 text-primary flex-shrink-0" />
+                <p className="text-sm text-muted-foreground">
+                  <span className="text-foreground font-medium">Trusted by security leaders, policymakers, and enterprises</span> across
+                  government, banking, and critical infrastructure sectors.
+                </p>
+              </div>
+            </div>
+
+            {/* Right — Email Capture Form */}
+            <div className="lg:sticky lg:top-28">
+              <Card className="border-primary/20 bg-card/80 backdrop-blur-sm shadow-2xl">
+                <CardContent className="p-8">
+                  {!isUnlocked ? (
+                    <>
+                      <div className="text-center mb-6">
+                        <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                          <FileText className="w-7 h-7 text-primary" />
+                        </div>
+                        <h3 className="text-2xl font-bold mb-2">Get the Full Report</h3>
+                        <p className="text-muted-foreground text-sm">
+                          Enter your details below to unlock the free PDF download.
+                        </p>
+                      </div>
+
+                      <form onSubmit={handleSubmit} className="space-y-4">
+                        <div className="space-y-2">
+                          <Label htmlFor="name">Full Name *</Label>
+                          <Input
+                            id="name"
+                            placeholder="Your full name"
+                            value={formData.name}
+                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                            className={errors.name ? 'border-destructive' : ''}
+                          />
+                          {errors.name && <p className="text-sm text-destructive">{errors.name}</p>}
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="email">Work Email *</Label>
+                          <Input
+                            id="email"
+                            type="email"
+                            placeholder="you@organization.com"
+                            value={formData.email}
+                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                            className={errors.email ? 'border-destructive' : ''}
+                          />
+                          {errors.email && <p className="text-sm text-destructive">{errors.email}</p>}
+                        </div>
+                        <Button type="submit" className="w-full h-12 text-base" disabled={isSubmitting}>
+                          {isSubmitting ? 'Processing…' : (
+                            <>Get the Report <ArrowRight className="w-4 h-4 ml-1" /></>
+                          )}
+                        </Button>
+                        <p className="text-xs text-center text-muted-foreground pt-1">
+                          By submitting, you agree to our{' '}
+                          <Link to="/privacy" className="underline hover:text-primary">Privacy Policy</Link>.
+                          We respect your inbox — no spam, ever.
+                        </p>
+                      </form>
+                    </>
+                  ) : (
+                    <div className="text-center py-6 space-y-5">
+                      <div className="w-16 h-16 rounded-full bg-green-500/10 flex items-center justify-center mx-auto">
+                        <CheckCircle2 className="w-8 h-8 text-green-500" />
+                      </div>
+                      <div>
+                        <h3 className="text-2xl font-bold mb-2">Thank You!</h3>
+                        <p className="text-muted-foreground">
+                          Your report is ready. Click below to download.
+                        </p>
+                      </div>
+                      <Button onClick={handleDownload} size="lg" className="w-full h-12 text-base">
+                        <Download className="w-5 h-5 mr-2" /> Download Report (PDF)
+                      </Button>
+                      <p className="text-xs text-muted-foreground">
+                        A copy has also been sent to your email.
+                      </p>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Subscription Form */}
-      <section className="py-16 bg-card border-t border-border">
-        <div className="container">
-          <div className="max-w-xl mx-auto">
-            <Card>
-              <CardHeader className="text-center">
-                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                  <Lock className="w-6 h-6 text-primary" />
-                </div>
-                <CardTitle className="text-2xl">Access the Full Report</CardTitle>
-                <p className="text-muted-foreground mt-2">
-                  Enter your details to download the complete report. The PDF will open in your browser immediately.
-                </p>
-              </CardHeader>
-              <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Work Email *</Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      placeholder="you@organization.com"
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className={errors.email ? 'border-destructive' : ''}
-                    />
-                    {errors.email && (
-                      <p className="text-sm text-destructive">{errors.email}</p>
-                    )}
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="organization">Organization *</Label>
-                    <Input
-                      id="organization"
-                      type="text"
-                      placeholder="Your company or agency"
-                      value={formData.organization}
-                      onChange={(e) => setFormData({ ...formData, organization: e.target.value })}
-                      className={errors.organization ? 'border-destructive' : ''}
-                    />
-                    {errors.organization && (
-                      <p className="text-sm text-destructive">{errors.organization}</p>
-                    )}
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="role">Your Role</Label>
-                    <Input
-                      id="role"
-                      type="text"
-                      placeholder="e.g., CISO, Compliance Officer, Risk Manager"
-                      value={formData.role || ''}
-                      onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-                      className={errors.role ? 'border-destructive' : ''}
-                    />
-                    {errors.role && (
-                      <p className="text-sm text-destructive">{errors.role}</p>
-                    )}
-                  </div>
-                  <Button type="submit" className="w-full" disabled={isSubmitting}>
-                    {isSubmitting ? 'Generating Report...' : 'Get Full Report (PDF)'}
-                  </Button>
-                  <p className="text-xs text-center text-muted-foreground">
-                    By subscribing, you agree to our{' '}
-                    <Link to="/privacy" className="underline hover:text-primary">Privacy Policy</Link>.
-                  </p>
-                </form>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-16 bg-primary/5">
+      {/* CTA */}
+      <section className="py-16 border-t border-border bg-primary/5">
         <div className="container text-center">
           <h2 className="text-2xl md:text-3xl font-bold mb-4">
             Need Immediate Deepfake Protection?
           </h2>
           <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Vibe Intelligence provides enterprise-grade deepfake detection and AI security 
-            solutions for Nigerian organizations.
+            Vibe Intelligence provides enterprise-grade deepfake detection and AI security
+            solutions for organizations across Africa.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Button asChild size="lg">
               <Link to="/consultation">Book a Consultation</Link>
             </Button>
             <Button asChild variant="outline" size="lg">
-              <Link to="/deepfake-detection">Learn About Our Service</Link>
+              <Link to="/deepfake-detection">Explore Our Solutions</Link>
             </Button>
           </div>
         </div>
