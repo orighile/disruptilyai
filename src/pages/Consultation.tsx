@@ -154,7 +154,7 @@ ____________________
           Schedule a virtual session or meet us in person at our Austin, TX or Lagos offices. Let's explore how AI can transform your business.
         </p>
 
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="max-w-xl mx-auto">
           <Card>
             <form onSubmit={handleSubmit} className="space-y-4">
               <label className="grid gap-1 text-sm">
