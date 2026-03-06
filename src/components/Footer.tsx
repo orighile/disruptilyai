@@ -32,10 +32,10 @@ const Footer = () => {
             <Link to="/deepfake-detection" className="text-muted-foreground hover:text-foreground transition">
               Deepfake Detection
             </Link>
-            <Link to="/services" className="text-muted-foreground hover:text-foreground transition">
+            <Link to="/ai-grc" className="text-muted-foreground hover:text-foreground transition">
               AI GRC
             </Link>
-            <Link to="/services" className="text-muted-foreground hover:text-foreground transition">
+            <Link to="/ai-marketing" className="text-muted-foreground hover:text-foreground transition">
               AI Marketing Automation
             </Link>
           </nav>
