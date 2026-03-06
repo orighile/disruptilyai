@@ -278,7 +278,7 @@ const DeepfakeReport = () => {
                         <Download className="w-5 h-5 mr-2" /> Download Report (PDF)
                       </Button>
                       <p className="text-xs text-muted-foreground">
-                        A copy has also been sent to your email.
+                        Thank you for your interest in our research.
                       </p>
                     </div>
                   )}
