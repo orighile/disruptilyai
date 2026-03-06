@@ -154,7 +154,7 @@ ____________________
           Schedule a virtual session or meet us in person at our Austin, TX or Lagos offices. Let's explore how AI can transform your business.
         </p>
 
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="max-w-xl mx-auto">
           <Card>
             <form onSubmit={handleSubmit} className="space-y-4">
               <label className="grid gap-1 text-sm">
@@ -246,22 +246,6 @@ ____________________
             </form>
           </Card>
 
-          <Card>
-            <div className="font-semibold mb-4">Pre-Consultation Questionnaire</div>
-            <ul className="text-sm text-muted-foreground list-disc list-inside space-y-2 mb-4">
-              <li>Which service interests you most — Deepfake Detection, AI GRC, or Marketing Automation?</li>
-              <li>Top 3 business outcomes you want from AI?</li>
-              <li>Data sources available (CRM, ERP, website, spreadsheets)?</li>
-              <li>Compliance requirements (SOC 2, GDPR, ISO 27001)?</li>
-              <li>Timeline and budget window?</li>
-            </ul>
-            <button 
-              onClick={handleDownloadTemplate}
-              className="text-sm text-accent-500 hover:text-accent-400 transition"
-            >
-              Download template →
-            </button>
-          </Card>
         </div>
       </div>
       <Footer />
