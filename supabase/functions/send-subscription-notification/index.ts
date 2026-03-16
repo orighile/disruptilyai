@@ -286,7 +286,7 @@ Deno.serve(async (req) => {
   try {
     const payload = (await req.json()) as RequestPayload
     const type = payload.type ?? 'report_subscription'
-    const realRunId = resolveRunId(req, payload)
+    const realRunId = resolveRunId(req)
     const correlationId = realRunId || crypto.randomUUID()
 
     let emailsToSend: QueuedEmail[]
