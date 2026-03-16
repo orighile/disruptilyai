@@ -78,7 +78,6 @@ async function enqueueTransactionalEmail(
   const { error: enqueueError } = await supabase.rpc('enqueue_email', {
     queue_name: 'transactional_emails',
     payload: {
-      run_id: crypto.randomUUID(),
       message_id: messageId,
       to: email.to,
       from: FROM_ADDRESS,
