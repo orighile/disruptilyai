@@ -281,6 +281,14 @@ Deno.serve(async (req) => {
   try {
     const payload = (await req.json()) as RequestPayload
     const type = payload.type ?? 'report_subscription'
+    const runId = resolveRunId(req, payload)
+
+    if (!runId) {
+      return new Response(JSON.stringify({ error: 'Missing request context. Please submit the form again.' }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json', ...corsHeaders },
+      })
+    }
 
     let emailsToSend: QueuedEmail[]
 
@@ -307,7 +315,7 @@ Deno.serve(async (req) => {
     const supabase = createClient(supabaseUrl, serviceRoleKey)
 
     for (const email of emailsToSend) {
-      await enqueueTransactionalEmail(supabase, email)
+      await enqueueTransactionalEmail(supabase, email, runId)
     }
 
     return new Response(JSON.stringify({ success: true, queued: emailsToSend.length, type }), {

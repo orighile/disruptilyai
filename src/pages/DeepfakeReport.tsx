@@ -30,7 +30,7 @@ const subscriptionSchema = z.object({
 
 type SubscriptionForm = z.infer<typeof subscriptionSchema>;
 
-const REPORT_DOWNLOAD_URL = 'https://vibe-intelligence.lovable.app/reports/vibe-ai-threat-report-2026.pdf';
+const REPORT_DOWNLOAD_URL = 'https://vibe-intelligence.lovable.app/reports/deepfake-report-2026.pdf';
 
 const DeepfakeReport = () => {
   const { toast } = useToast();
