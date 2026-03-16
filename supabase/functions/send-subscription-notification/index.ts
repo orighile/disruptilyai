@@ -4,6 +4,7 @@ type NotificationType = 'report_subscription' | 'consultation_request'
 
 type ReportSubscriptionRequest = {
   type?: NotificationType
+  runId?: string
   email: string
   organization: string
   role?: string
@@ -13,6 +14,7 @@ type ReportSubscriptionRequest = {
 
 type ConsultationRequest = {
   type: NotificationType
+  runId?: string
   name: string
   email: string
   phone?: string
@@ -35,14 +37,14 @@ type QueuedEmail = {
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers':
-    'authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version',
+    'authorization, x-client-info, apikey, content-type, x-lovable-run-id, x-request-id, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version',
 }
 
 const SENDER_DOMAIN = 'notify.vibeintell.com'
 const FROM_ADDRESS = 'Vibe Intelligence <notify@vibeintell.com>'
 const ADMIN_EMAIL = 'team@vibe-intelligence.com'
 const DEFAULT_SITE_URL = 'https://vibe-intelligence.lovable.app'
-const DEFAULT_REPORT_DOWNLOAD_URL = `${DEFAULT_SITE_URL}/reports/vibe-ai-threat-report-2026.pdf`
+const DEFAULT_REPORT_DOWNLOAD_URL = `${DEFAULT_SITE_URL}/reports/deepfake-report-2026.pdf`
 
 function escapeHtml(value: string): string {
   return value
@@ -62,9 +64,24 @@ function isValidHttpUrl(value: string): boolean {
   }
 }
 
+function normalizeRunId(value: unknown): string | null {
+  if (typeof value !== 'string') return null
+  const trimmed = value.trim()
+  return trimmed.length > 0 ? trimmed : null
+}
+
+function resolveRunId(req: Request, payload: RequestPayload): string | null {
+  return (
+    normalizeRunId(payload.runId) ||
+    normalizeRunId(req.headers.get('x-lovable-run-id')) ||
+    normalizeRunId(req.headers.get('x-request-id'))
+  )
+}
+
 async function enqueueTransactionalEmail(
   supabase: ReturnType<typeof createClient>,
-  email: QueuedEmail
+  email: QueuedEmail,
+  runId: string
 ): Promise<void> {
   const messageId = crypto.randomUUID()
 
@@ -73,11 +90,13 @@ async function enqueueTransactionalEmail(
     template_name: email.label,
     recipient_email: email.to,
     status: 'pending',
+    metadata: { run_id: runId },
   })
 
   const { error: enqueueError } = await supabase.rpc('enqueue_email', {
     queue_name: 'transactional_emails',
     payload: {
+      run_id: runId,
       message_id: messageId,
       to: email.to,
       from: FROM_ADDRESS,
@@ -104,6 +123,7 @@ async function enqueueTransactionalEmail(
       recipient_email: email.to,
       status: 'failed',
       error_message: 'Failed to enqueue email',
+      metadata: { run_id: runId },
     })
 
     throw new Error('Failed to enqueue transactional email')
@@ -261,6 +281,14 @@ Deno.serve(async (req) => {
   try {
     const payload = (await req.json()) as RequestPayload
     const type = payload.type ?? 'report_subscription'
+    const runId = resolveRunId(req, payload)
+
+    if (!runId) {
+      return new Response(JSON.stringify({ error: 'Missing request context. Please submit the form again.' }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json', ...corsHeaders },
+      })
+    }
 
     let emailsToSend: QueuedEmail[]
 
@@ -287,7 +315,7 @@ Deno.serve(async (req) => {
     const supabase = createClient(supabaseUrl, serviceRoleKey)
 
     for (const email of emailsToSend) {
-      await enqueueTransactionalEmail(supabase, email)
+      await enqueueTransactionalEmail(supabase, email, runId)
     }
 
     return new Response(JSON.stringify({ success: true, queued: emailsToSend.length, type }), {
