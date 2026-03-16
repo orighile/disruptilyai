@@ -294,7 +294,8 @@ Deno.serve(async (req) => {
   try {
     const payload = (await req.json()) as RequestPayload
     const type = payload.type ?? 'report_subscription'
-    const runId = resolveRunId(req, payload) || crypto.randomUUID()
+    const realRunId = resolveRunId(req, payload)
+    const correlationId = realRunId || crypto.randomUUID()
 
     let emailsToSend: QueuedEmail[]
 
@@ -321,7 +322,7 @@ Deno.serve(async (req) => {
     const supabase = createClient(supabaseUrl, serviceRoleKey)
 
     for (const email of emailsToSend) {
-      await enqueueTransactionalEmail(supabase, email, runId)
+      await enqueueTransactionalEmail(supabase, email, correlationId, realRunId)
     }
 
     return new Response(JSON.stringify({ success: true, queued: emailsToSend.length, type }), {
