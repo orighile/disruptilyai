@@ -225,7 +225,7 @@ ____________________
                     className="bg-input rounded-xl px-3 py-2 border border-border"
                   >
                     <option value="free">Free 30-min AI Strategy Session</option>
-                    <option value="audit">Deepfake Detection Assessment</option>
+                    <option value="audit">Free Deepfake Vulnerability Scan (Proof Pilot)</option>
                     <option value="quote">AI GRC Program Consultation</option>
                     <option value="training">Marketing Automation Consultation</option>
                   </select>
