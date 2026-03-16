@@ -70,17 +70,36 @@ function normalizeRunId(value: unknown): string | null {
   return trimmed.length > 0 ? trimmed : null
 }
 
-function resolveRunId(req: Request, payload: RequestPayload): string | null {
-  return (
-    normalizeRunId(payload.runId) ||
-    normalizeRunId(req.headers.get('x-lovable-run-id')) ||
-    normalizeRunId(req.headers.get('x-request-id'))
-  )
+function extractRunIdFromUrl(urlValue: string | null): string | null {
+  if (!urlValue) return null
+
+  try {
+    const host = new URL(urlValue).hostname.toLowerCase()
+
+    const previewMatch = host.match(/^id-preview--([0-9a-f-]{36})\./)
+    if (previewMatch?.[1]) return previewMatch[1]
+
+    const projectMatch = host.match(/^([0-9a-f-]{36})\.lovableproject\.com$/)
+    if (projectMatch?.[1]) return projectMatch[1]
+
+    return null
+  } catch {
+    return null
+  }
 }
 
-/** True when the run ID came from a real source (not a fallback UUID). */
-function isRealRunId(req: Request, payload: RequestPayload): boolean {
-  return resolveRunId(req, payload) !== null
+function resolveRunId(req: Request, payload: RequestPayload): string | null {
+  const candidates = [
+    normalizeRunId(payload.runId),
+    normalizeRunId(req.headers.get('x-lovable-run-id')),
+    normalizeRunId(req.headers.get('x-request-id')),
+    normalizeRunId(req.headers.get('sb-request-id')),
+    normalizeRunId(req.headers.get('x-sb-request-id')),
+    extractRunIdFromUrl(req.headers.get('origin')),
+    extractRunIdFromUrl(req.headers.get('referer')),
+  ]
+
+  return candidates.find((candidate): candidate is string => Boolean(candidate)) ?? null
 }
 
 async function enqueueTransactionalEmail(

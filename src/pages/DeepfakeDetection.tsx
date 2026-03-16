@@ -27,7 +27,7 @@ const DeepfakeDetection = () => {
             manipulated content across all media formats.
           </p>
           <Button as={Link} to="/consultation" size="lg">
-            Request a Demo
+            Start Free Vulnerability Scan
           </Button>
         </div>
       </section>
