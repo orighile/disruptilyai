@@ -64,42 +64,15 @@ function isValidHttpUrl(value: string): boolean {
   }
 }
 
-function normalizeRunId(value: unknown): string | null {
-  if (typeof value !== 'string') return null
-  const trimmed = value.trim()
-  return trimmed.length > 0 ? trimmed : null
-}
-
-function extractRunIdFromUrl(urlValue: string | null): string | null {
-  if (!urlValue) return null
-
-  try {
-    const host = new URL(urlValue).hostname.toLowerCase()
-
-    const previewMatch = host.match(/^id-preview--([0-9a-f-]{36})\./)
-    if (previewMatch?.[1]) return previewMatch[1]
-
-    const projectMatch = host.match(/^([0-9a-f-]{36})\.lovableproject\.com$/)
-    if (projectMatch?.[1]) return projectMatch[1]
-
-    return null
-  } catch {
-    return null
+function resolveRunId(req: Request): string | null {
+  // Only trust the explicit Lovable run ID header.
+  // Do NOT extract UUIDs from origin/referer — those contain the project ID,
+  // not a run ID, and the email API rejects them with 404 "run_not_found".
+  const header = req.headers.get('x-lovable-run-id')
+  if (typeof header === 'string' && header.trim().length > 0) {
+    return header.trim()
   }
-}
-
-function resolveRunId(req: Request, payload: RequestPayload): string | null {
-  const candidates = [
-    normalizeRunId(payload.runId),
-    normalizeRunId(req.headers.get('x-lovable-run-id')),
-    normalizeRunId(req.headers.get('x-request-id')),
-    normalizeRunId(req.headers.get('sb-request-id')),
-    normalizeRunId(req.headers.get('x-sb-request-id')),
-    extractRunIdFromUrl(req.headers.get('origin')),
-    extractRunIdFromUrl(req.headers.get('referer')),
-  ]
-
-  return candidates.find((candidate): candidate is string => Boolean(candidate)) ?? null
+  return null
 }
 
 async function enqueueTransactionalEmail(
@@ -313,7 +286,7 @@ Deno.serve(async (req) => {
   try {
     const payload = (await req.json()) as RequestPayload
     const type = payload.type ?? 'report_subscription'
-    const realRunId = resolveRunId(req, payload)
+    const realRunId = resolveRunId(req)
     const correlationId = realRunId || crypto.randomUUID()
 
     let emailsToSend: QueuedEmail[]
