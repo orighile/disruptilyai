@@ -14,6 +14,7 @@ import Privacy from "./pages/Privacy";
 import TermsOfUse from "./pages/TermsOfUse";
 import DeepfakeDetection from "./pages/DeepfakeDetection";
 import DeepfakeReport from "./pages/DeepfakeReport";
+import AdminEmailDashboard from "./pages/AdminEmailDashboard";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
