@@ -30,6 +30,8 @@ const subscriptionSchema = z.object({
 
 type SubscriptionForm = z.infer<typeof subscriptionSchema>;
 
+const REPORT_DOWNLOAD_URL = 'https://vibe-intelligence.lovable.app/reports/vibe-ai-threat-report-2026.pdf';
+
 const DeepfakeReport = () => {
   const { toast } = useToast();
   const [formData, setFormData] = useState<SubscriptionForm>({ name: '', email: '' });
@@ -68,26 +70,31 @@ const DeepfakeReport = () => {
         throw new Error('Failed to save subscription');
       }
 
-      // Fire-and-forget notification
-      supabase.functions.invoke('send-subscription-notification', {
+      const { error: notificationError } = await supabase.functions.invoke('send-subscription-notification', {
         body: {
+          type: 'report_subscription',
           email: result.data.email,
           organization: result.data.name,
-          reportType: 'Global State of Deepfakes 2026'
-        }
-      }).catch(console.error);
+          reportType: 'Global State of Deepfakes 2026',
+          reportDownloadUrl: REPORT_DOWNLOAD_URL,
+        },
+      });
+
+      if (notificationError) {
+        throw new Error(notificationError.message || 'Failed to send report email');
+      }
 
       setIsUnlocked(true);
       toast({
-        title: "Access Granted!",
-        description: "Your report is ready for download.",
+        title: 'Access Granted!',
+        description: 'Your report is ready and the download link was sent to your email.',
       });
     } catch (error) {
       console.error('Submission error:', error);
       toast({
-        title: "Error",
-        description: "There was a problem processing your request. Please try again.",
-        variant: "destructive"
+        title: 'Error',
+        description: 'There was a problem processing your request. Please try again.',
+        variant: 'destructive'
       });
     } finally {
       setIsSubmitting(false);
@@ -95,7 +102,7 @@ const DeepfakeReport = () => {
   };
 
   const handleDownload = () => {
-    window.open('/reports/deepfake-report-2026.pdf', '_blank');
+    window.open(REPORT_DOWNLOAD_URL, '_blank');
   };
 
   const stats = [

@@ -4,6 +4,7 @@ import { Card, Button } from '../components/ui';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { useToast } from '../hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
 
 // Validation schema
 const consultationSchema = z.object({
@@ -59,13 +60,12 @@ const Consultation = () => {
     }
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setErrors({});
-    
-    // Validate form data
+
     const result = consultationSchema.safeParse(form);
-    
+
     if (!result.success) {
       const fieldErrors: Partial<Record<keyof ConsultationForm, string>> = {};
       result.error.errors.forEach((error) => {
@@ -77,19 +77,44 @@ const Consultation = () => {
       setErrors(fieldErrors);
       return;
     }
-    
+
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    setTimeout(() => {
-      toast({
-        title: "Request Submitted!",
-        description: "We'll contact you within 24 hours to confirm your consultation.",
+
+    try {
+      const { error } = await supabase.functions.invoke('send-subscription-notification', {
+        body: {
+          type: 'consultation_request',
+          name: result.data.name,
+          email: result.data.email,
+          phone: result.data.phone,
+          consultationType: result.data.type,
+          city: result.data.city,
+          message: result.data.message,
+          attachmentName: fileName || null,
+        },
       });
+
+      if (error) {
+        throw new Error(error.message || 'Failed to send consultation emails');
+      }
+
+      toast({
+        title: 'Request Submitted!',
+        description: "We've emailed your confirmation and our team has been notified.",
+      });
+
       setForm({ name: '', email: '', phone: '', type: 'free', city: '', message: '' });
       setFileName('');
+    } catch (error) {
+      console.error('Consultation submission failed:', error);
+      toast({
+        title: 'Submission Failed',
+        description: 'We could not send your request right now. Please try again.',
+        variant: 'destructive',
+      });
+    } finally {
       setIsSubmitting(false);
-    }, 1000);
+    }
   }
 
   function handleDownloadTemplate() {
