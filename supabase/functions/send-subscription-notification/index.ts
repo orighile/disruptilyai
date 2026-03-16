@@ -281,14 +281,7 @@ Deno.serve(async (req) => {
   try {
     const payload = (await req.json()) as RequestPayload
     const type = payload.type ?? 'report_subscription'
-    const runId = resolveRunId(req, payload)
-
-    if (!runId) {
-      return new Response(JSON.stringify({ error: 'Missing request context. Please submit the form again.' }), {
-        status: 400,
-        headers: { 'Content-Type': 'application/json', ...corsHeaders },
-      })
-    }
+    const runId = resolveRunId(req, payload) || crypto.randomUUID()
 
     let emailsToSend: QueuedEmail[]
 
