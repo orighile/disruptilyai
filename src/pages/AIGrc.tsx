@@ -121,6 +121,8 @@ const AIGrc = () => {
 
       <CTASection />
       <Footer />
+    </div>
+  );
 };
 
 export default AIGrc;

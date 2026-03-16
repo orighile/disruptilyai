@@ -101,6 +101,8 @@ const AIMarketing = () => {
 
       <CTASection />
       <Footer />
+    </div>
+  );
 };
 
 export default AIMarketing;

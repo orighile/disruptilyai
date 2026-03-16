@@ -240,6 +240,8 @@ const DeepfakeDetection = () => {
 
       <CTASection />
       <Footer />
+    </div>
+  );
 };
 
 export default DeepfakeDetection;
