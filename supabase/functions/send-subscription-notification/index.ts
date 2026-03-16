@@ -78,6 +78,11 @@ function resolveRunId(req: Request, payload: RequestPayload): string | null {
   )
 }
 
+/** True when the run ID came from a real source (not a fallback UUID). */
+function isRealRunId(req: Request, payload: RequestPayload): boolean {
+  return resolveRunId(req, payload) !== null
+}
+
 async function enqueueTransactionalEmail(
   supabase: ReturnType<typeof createClient>,
   email: QueuedEmail,
