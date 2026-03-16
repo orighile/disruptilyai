@@ -4,6 +4,7 @@ import { Card, Button } from '../components/ui';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { useToast } from '../hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
 
 // Validation schema
 const consultationSchema = z.object({
