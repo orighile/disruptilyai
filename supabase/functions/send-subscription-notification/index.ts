@@ -78,10 +78,16 @@ function resolveRunId(req: Request, payload: RequestPayload): string | null {
   )
 }
 
+/** True when the run ID came from a real source (not a fallback UUID). */
+function isRealRunId(req: Request, payload: RequestPayload): boolean {
+  return resolveRunId(req, payload) !== null
+}
+
 async function enqueueTransactionalEmail(
   supabase: ReturnType<typeof createClient>,
   email: QueuedEmail,
-  runId: string
+  correlationId: string,
+  realRunId: string | null
 ): Promise<void> {
   const messageId = crypto.randomUUID()
 
@@ -90,24 +96,31 @@ async function enqueueTransactionalEmail(
     template_name: email.label,
     recipient_email: email.to,
     status: 'pending',
-    metadata: { run_id: runId },
+    metadata: { correlation_id: correlationId },
   })
+
+  const queuePayload: Record<string, unknown> = {
+    message_id: messageId,
+    to: email.to,
+    from: FROM_ADDRESS,
+    sender_domain: SENDER_DOMAIN,
+    subject: email.subject,
+    html: email.html,
+    text: email.text,
+    purpose: 'transactional',
+    label: email.label,
+    queued_at: new Date().toISOString(),
+  }
+
+  // Only include run_id when we have a real Lovable run ID from request headers.
+  // A fabricated UUID would cause the email API to reject with 404 "run_not_found".
+  if (realRunId) {
+    queuePayload.run_id = realRunId
+  }
 
   const { error: enqueueError } = await supabase.rpc('enqueue_email', {
     queue_name: 'transactional_emails',
-    payload: {
-      run_id: runId,
-      message_id: messageId,
-      to: email.to,
-      from: FROM_ADDRESS,
-      sender_domain: SENDER_DOMAIN,
-      subject: email.subject,
-      html: email.html,
-      text: email.text,
-      purpose: 'transactional',
-      label: email.label,
-      queued_at: new Date().toISOString(),
-    },
+    payload: queuePayload,
   })
 
   if (enqueueError) {
@@ -123,7 +136,7 @@ async function enqueueTransactionalEmail(
       recipient_email: email.to,
       status: 'failed',
       error_message: 'Failed to enqueue email',
-      metadata: { run_id: runId },
+      metadata: { correlation_id: correlationId },
     })
 
     throw new Error('Failed to enqueue transactional email')
@@ -281,7 +294,8 @@ Deno.serve(async (req) => {
   try {
     const payload = (await req.json()) as RequestPayload
     const type = payload.type ?? 'report_subscription'
-    const runId = resolveRunId(req, payload) || crypto.randomUUID()
+    const realRunId = resolveRunId(req, payload)
+    const correlationId = realRunId || crypto.randomUUID()
 
     let emailsToSend: QueuedEmail[]
 
@@ -308,7 +322,7 @@ Deno.serve(async (req) => {
     const supabase = createClient(supabaseUrl, serviceRoleKey)
 
     for (const email of emailsToSend) {
-      await enqueueTransactionalEmail(supabase, email, runId)
+      await enqueueTransactionalEmail(supabase, email, correlationId, realRunId)
     }
 
     return new Response(JSON.stringify({ success: true, queued: emailsToSend.length, type }), {

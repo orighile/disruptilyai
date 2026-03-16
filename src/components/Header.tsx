@@ -38,6 +38,9 @@ const Header = () => {
             <Link to="/custom-ai-automation" className="text-sm hover:text-accent-400 transition">
               Custom AI
             </Link>
+            <Link to="/deepfake-report" className="text-sm hover:text-accent-400 transition">
+              Report
+            </Link>
             <Link to="/success-stories" className="text-sm hover:text-accent-400 transition">
               Success Stories
             </Link>
@@ -73,6 +76,9 @@ const Header = () => {
               </Link>
               <Link to="/custom-ai-automation" className="text-sm hover:text-accent-400 transition" onClick={() => setIsOpen(false)}>
                 Custom AI
+              </Link>
+              <Link to="/deepfake-report" className="text-sm hover:text-accent-400 transition" onClick={() => setIsOpen(false)}>
+                Report
               </Link>
               <Link to="/success-stories" className="text-sm hover:text-accent-400 transition" onClick={() => setIsOpen(false)}>
                 Success Stories

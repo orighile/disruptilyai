@@ -106,6 +106,19 @@ const AIGrc = () => {
         </div>
       </section>
 
+      {/* Report CTA */}
+      <section className="container py-12">
+        <Card className="p-8 flex flex-col md:flex-row items-center gap-6 bg-primary/10 border-accent-500/20">
+          <div className="flex-1">
+            <h3 className="text-xl font-bold mb-2">AI Threat Intelligence Report</h3>
+            <p className="text-sm text-muted-foreground">Understand the deepfake landscape shaping AI governance — download our 2026 research report.</p>
+          </div>
+          <Button as={Link} to="/deepfake-report">
+            Download Report
+          </Button>
+        </Card>
+      </section>
+
       <CTASection />
       <Footer />
     </div>
