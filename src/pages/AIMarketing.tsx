@@ -86,10 +86,21 @@ const AIMarketing = () => {
         </div>
       </section>
 
+      {/* Report CTA */}
+      <section className="container py-12">
+        <Card className="p-8 flex flex-col md:flex-row items-center gap-6 bg-primary/10 border-accent-500/20">
+          <div className="flex-1">
+            <h3 className="text-xl font-bold mb-2">AI Threat Intelligence Report</h3>
+            <p className="text-sm text-muted-foreground">Stay ahead of synthetic media risks — download our 2026 Deepfake Report to inform your marketing security strategy.</p>
+          </div>
+          <Button as={Link} to="/deepfake-report">
+            Download Report
+          </Button>
+        </Card>
+      </section>
+
       <CTASection />
       <Footer />
-    </div>
-  );
 };
 
 export default AIMarketing;
